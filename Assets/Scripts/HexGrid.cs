@@ -4,42 +4,27 @@ using UnityEngine;
 
 public enum Hexinal { E = 0,NE = 1,NW = 2,W = 3,SW =  4,SE= 5};
 
-public class HexTile
-{
-    public HexTile(Vector2 worldPos, Vector2Int gridPos)
-    {
-        this.worldPos = worldPos;
-        this.gridPos = gridPos;
-        adjTiles = new HexTile[6];
-    }
-
-    public Vector2 worldPos;
-    public Vector2Int gridPos;
-    public HexTile[] adjTiles;
-}
-
 public class HexGrid : MonoBehaviour
 {
+    public GridElementManager gridElementManager;
+    public new Transform transform;
+
     public static HexTile[][] grid;
-    public GameObject tempGO;
+    public GameObject tileGO;
 
-    private void Start()
+    public int gridRadius;
+    public Vector2 tileDelta;
+    public Vector2 centerPos;
+
+    public void Awake()
     {
-        CreateGrid(6, 2, Vector2.zero);
+        transform = GetComponent<Transform>();
+        tileDelta.y = tileDelta.x * Mathf.Cos(30 * Mathf.Deg2Rad);//
+        CreateGrid(6, tileDelta, centerPos);
 
-        for (int y = 0; y < grid.Length; y++)
-        {
-            for (int x = 0; x < grid[y].Length; x++)
-            {
-                for (int i = 0; i < 3; i++)
-                {
-                    if(grid[y][x].adjTiles[i]!= null) Debug.DrawLine(grid[y][x].worldPos, grid[y][x].adjTiles[i].worldPos,Color.red, 9999999999);
-                }
-            }
-        }
     }
 
-    public void CreateGrid(int gridRadius, float tileRadius, Vector2 centerPos)
+    public void CreateGrid(int gridRadius, Vector2 tileDelta, Vector2 centerPos)
     {
         grid = new HexTile[gridRadius * 2 - 1][];
 
@@ -49,7 +34,8 @@ public class HexGrid : MonoBehaviour
             grid[y] = new HexTile[numOfx];
             for (int x = 0; x < numOfx; x++)
             {
-                HexTile hexTile = new HexTile(new Vector2(x * tileRadius - numOfx * tileRadius * 0.5f + centerPos.x, y * tileRadius + centerPos.y), new Vector2Int(x, y));
+                Vector2 worldPos = new Vector2(x * tileDelta.x - numOfx * tileDelta.x * 0.5f + centerPos.x, y * tileDelta.y + centerPos.y);
+                HexTile hexTile = new HexTile(worldPos, new Vector2Int(x, y), Instantiate(tileGO, worldPos, Quaternion.identity, this.transform).transform);
                 if(x > 0)
                 {
                     hexTile.adjTiles[(int)Hexinal.W] = grid[y][x - 1];
@@ -81,8 +67,22 @@ public class HexGrid : MonoBehaviour
                     }
                 }
                 grid[y][x] = hexTile;
-                Instantiate(tempGO, grid[y][x].worldPos, Quaternion.identity, null);
             }
         }
     }
+
+    
+    public HexTile ScreenPosToGrid(Vector2 screenPos)
+    {
+        return WorldPosToGrid(MainCamera.camera.ScreenToWorldPoint(screenPos));
+    }
+
+    public HexTile WorldPosToGrid(Vector2 worldPos)
+    {
+        int y = Mathf.RoundToInt((worldPos.y - centerPos.y) / tileDelta.y);
+        int x = Mathf.RoundToInt(((worldPos.x - centerPos.x) + 0.5f * tileDelta.x * (int)(Mathf.PingPong(y, gridRadius - 1) + gridRadius))/tileDelta.x);
+        if (y < 0 || x < 0 || y >= grid.Length || x >= grid[y].Length) return null;
+        else return grid[y][x];
+    }
+    
 }
