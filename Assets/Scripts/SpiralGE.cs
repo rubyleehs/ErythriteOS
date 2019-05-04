@@ -10,7 +10,7 @@ public class SpiralGE : GridElement
         HexTile runTile = tile;
         for (int i = 0; i < 6; i++)
         {
-            while (runTile.adjTiles[i] != null && runTile.adjTiles[i].elementID == -1)
+            while (runTile.adjTiles[i] != null && runTile.adjTiles[i].ReadID() == -1)
             {
                 float dt = 0;
                 while(dt < GameManager.boardUpdateAnimDur && GameManager.allowBoardUpdateAnim)

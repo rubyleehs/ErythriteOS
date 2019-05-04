@@ -21,14 +21,20 @@ public class HexTile
     public Vector2Int gridPos;
     public HexTile[] adjTiles;
 
-    public int elementID;
-    public SpriteRenderer spriteRenderer;
+    private int elementID;
+    private SpriteRenderer spriteRenderer;
 
     public void UpdateElement(int id)
     {
         elementID = id;
-
+        //glow
         if (elementID >= 0)spriteRenderer.sprite = GridElementManager.elements[elementID].sprite;
         else spriteRenderer.sprite = null;
+    }
+
+    public int ReadID()
+    {
+        //glow
+        return elementID;
     }
 }

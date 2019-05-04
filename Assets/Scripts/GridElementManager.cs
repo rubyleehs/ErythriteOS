@@ -22,6 +22,6 @@ public class GridElementManager : MonoBehaviour
         GameManager.allowBoardUpdateAnim = false;
         yield return new WaitForEndOfFrame();
         GameManager.allowBoardUpdateAnim = true;
-        if (tile.elementID >= 0) StartCoroutine(elements[tile.elementID].Run(tile));
+        if (tile.ReadID() >= 0) StartCoroutine(elements[tile.ReadID()].Run(tile));
     }
 }
