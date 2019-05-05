@@ -205,7 +205,7 @@ MonoBehaviour:
   I_hexGrid: {fileID: 1819781636}
   I_elements:
   - {fileID: 11400000, guid: 740a9d3e24978e144b61c1bcdf56cccf, type: 2}
-  - {fileID: 11400000, guid: 16c218ce6e849504a838711f7ecff807, type: 2}
+  - {fileID: 11400000, guid: ef474ae3b63bf184bbbb0ff7b3164f2d, type: 2}
   gridRadius: 7
   tileXDelta: 1
   centerPos: {x: 0, y: 0}
