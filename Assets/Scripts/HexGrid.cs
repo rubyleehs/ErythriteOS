@@ -7,7 +7,9 @@ public enum Hexinal { E = 0,NE = 1,NW = 2,W = 3,SW =  4,SE= 5};
 public class HexGrid : MonoBehaviour
 {
     public GridElementManager gridElementManager;
+    [HideInInspector]
     public new Transform transform;
+    public Transform background;
 
     public static HexTile[][] grid;
     public GameObject tileGO;
@@ -20,12 +22,14 @@ public class HexGrid : MonoBehaviour
     {
         transform = GetComponent<Transform>();
         tileDelta.y = tileDelta.x * Mathf.Cos(30 * Mathf.Deg2Rad);//
-        CreateGrid(6, tileDelta, centerPos);
+        CreateGrid(gridRadius, tileDelta, centerPos);
 
     }
 
     public void CreateGrid(int gridRadius, Vector2 tileDelta, Vector2 centerPos)
     {
+        background.position = centerPos;
+        background.localScale = Vector2.one * (gridRadius * 2 - 0.5f);
         grid = new HexTile[gridRadius * 2 - 1][];
 
         for (int y = 0; y < gridRadius * 2 - 1; y++)
@@ -34,7 +38,7 @@ public class HexGrid : MonoBehaviour
             grid[y] = new HexTile[numOfx];
             for (int x = 0; x < numOfx; x++)
             {
-                Vector2 worldPos = new Vector2(x * tileDelta.x - numOfx * tileDelta.x * 0.5f + centerPos.x, y * tileDelta.y + centerPos.y);
+                Vector2 worldPos = new Vector2(x * tileDelta.x - (numOfx - 1)  * tileDelta.x * 0.5f + centerPos.x, (y - gridRadius + 1) * tileDelta.y + centerPos.y);
                 HexTile hexTile = new HexTile(worldPos, new Vector2Int(x, y), Instantiate(tileGO, worldPos, Quaternion.identity, this.transform).transform);
                 if(x > 0)
                 {
@@ -79,8 +83,8 @@ public class HexGrid : MonoBehaviour
 
     public HexTile WorldPosToGrid(Vector2 worldPos)
     {
-        int y = Mathf.RoundToInt((worldPos.y - centerPos.y) / tileDelta.y);
-        int x = Mathf.RoundToInt(((worldPos.x - centerPos.x) + 0.5f * tileDelta.x * (int)(Mathf.PingPong(y, gridRadius - 1) + gridRadius))/tileDelta.x);
+        int y = Mathf.RoundToInt((worldPos.y - centerPos.y) / tileDelta.y) + gridRadius - 1;
+        int x = Mathf.RoundToInt(((worldPos.x - centerPos.x) + 0.5f * tileDelta.x * (int)(Mathf.PingPong(y, gridRadius - 1) + gridRadius - 1))/tileDelta.x);
         if (y < 0 || x < 0 || y >= grid.Length || x >= grid[y].Length) return null;
         else return grid[y][x];
     }

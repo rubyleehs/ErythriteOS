@@ -13,8 +13,11 @@ public class HexTile
         this.adjTiles = new HexTile[6];
 
         this.elementID = -1;
-        this.spriteRenderer = tile.GetChild(0).GetComponent<SpriteRenderer>();
+        this.elementSpriteRenderer = tile.GetChild(0).GetComponent<SpriteRenderer>();
+        this.spriteRenderer = tile.GetComponent<SpriteRenderer>();
+        this.originalColor = spriteRenderer.color;
     }
+
     public Transform tile;
 
     public Vector2 worldPos;
@@ -22,19 +25,47 @@ public class HexTile
     public HexTile[] adjTiles;
 
     private int elementID;
+
+    private SpriteRenderer elementSpriteRenderer;
     private SpriteRenderer spriteRenderer;
+    private Color originalColor;
 
     public void UpdateElement(int id)
     {
+        Debug.Log("Update to " + id);
         elementID = id;
-        //glow
-        if (elementID >= 0)spriteRenderer.sprite = GridElementManager.elements[elementID].sprite;
-        else spriteRenderer.sprite = null;
     }
 
-    public int ReadID()
+    public int ReadElementID()
     {
-        //glow
         return elementID;
+    }
+
+    public void UpdateVisuals()
+    {
+        if (elementID >= 0) elementSpriteRenderer.sprite = GridElementManager.elements[elementID].sprite;
+        else elementSpriteRenderer.sprite = null;
+
+        GameManager.shotgunSurgery.ForceStartCoroutine(LightUp(GameManager.animationInfo.tileLightUpColor));
+
+    }
+   
+    public IEnumerator LightUp(Color color)
+    {
+        Color endColor;
+        if (elementID == -1) endColor = originalColor;
+        else endColor = GameManager.animationInfo.occupiedTileColor;
+
+        spriteRenderer.color = color;
+
+        float dt = 0;
+        while(dt < GameManager.animationInfo.tileLightUpDuration)
+        {
+            dt += Time.deltaTime;
+            spriteRenderer.color = Color.Lerp(color, endColor, dt / GameManager.animationInfo.tileLightUpDuration);
+            yield return new WaitForEndOfFrame();
+        }
+
+        spriteRenderer.color = endColor;
     }
 }
