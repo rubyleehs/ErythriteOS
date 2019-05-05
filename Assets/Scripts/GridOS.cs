@@ -30,6 +30,7 @@ public class GridOS : MonoBehaviour
     {
         if (tile.ReadElementID() >= 0)
         {
+            Debug.Log(tile.ReadElementID());
             GameManager.tvus.ForceComplete();
             tile.UpdateVisuals();
             elements[tile.ReadElementID()].Run(tile);

@@ -42,15 +42,29 @@ public class GameManager : MonoBehaviour
                 if (ht.adjTiles[i] != null) Debug.DrawLine(ht.worldPos, ht.adjTiles[i].worldPos, Color.red, 1);
             }
 
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetKeyDown(KeyCode.Alpha0))
             {
                 ht.UpdateElement(0);
                 GridOS.Run(ht);
             }
-            else if (Input.GetButtonDown("Fire2"))
+            else if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 ht.UpdateElement(1);
                 GridOS.Run(ht);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                ht.UpdateElement(2);
+                GridOS.Run(ht);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                ht.UpdateElement(3);
+                GridOS.Run(ht);
+            }
+            else if (Input.GetButtonDown("Fire1"))
+            {
+                Debug.Log(ht.ReadElementID());
             }
         }
 

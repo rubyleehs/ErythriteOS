@@ -46,6 +46,8 @@ public class GridHistory : MonoBehaviour
     public static void Undo()
     {
         if (currentPointOfTime < 0) return;
+        GameManager.tvus.ForceComplete();
+
         for (int i = 0; i < history[currentPointOfTime].Count; i++)
         {
             GridChange change = history[currentPointOfTime][i];
@@ -61,6 +63,7 @@ public class GridHistory : MonoBehaviour
     public static void Redo()
     {
         if (currentPointOfTime >= history.Count - 1) return;
+        GameManager.tvus.ForceComplete();
 
         for (int i = 0; i < history[currentPointOfTime + 1].Count; i++)
         {

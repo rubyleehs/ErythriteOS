@@ -16,6 +16,7 @@ public class HexTile
         this.elementSpriteRenderer = tile.GetChild(0).GetComponent<SpriteRenderer>();
         this.spriteRenderer = tile.GetComponent<SpriteRenderer>();
         this.originalColor = spriteRenderer.color;
+
     }
 
     public Transform tile;

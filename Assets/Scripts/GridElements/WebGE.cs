@@ -7,7 +7,8 @@ public class WebGE : GridElement
 {
     public override void Run(HexTile tile)
     {
-        HexTile[] runTiles = tile.adjTiles;
+        HexTile[] runTiles = new HexTile[6];
+        tile.adjTiles.CopyTo(runTiles,0);
         bool isDone = false;
         while (!isDone)
         {
@@ -18,10 +19,10 @@ public class WebGE : GridElement
                 if (runTiles[i] == null) continue;
                 else
                 {
-                    visualUpdateTiles.Add(runTiles[i]);
                     if (runTiles[i].ReadElementID() == -1)
                     {
                         runTiles[i].UpdateElement(id);
+                        visualUpdateTiles.Add(runTiles[i]);
                         isDone = false;
                         runTiles[i] = runTiles[i].adjTiles[i];
                     }
