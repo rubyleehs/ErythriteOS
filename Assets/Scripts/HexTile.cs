@@ -32,8 +32,11 @@ public class HexTile
 
     public void UpdateElement(int id)
     {
-        Debug.Log("Update to " + id);
-        elementID = id;
+        if (elementID != id)
+        {
+            GridHistory.AddToPresent(gridPos, elementID, id);
+            elementID = id;
+        }
     }
 
     public int ReadElementID()
@@ -43,7 +46,7 @@ public class HexTile
 
     public void UpdateVisuals()
     {
-        if (elementID >= 0) elementSpriteRenderer.sprite = GridElementManager.elements[elementID].sprite;
+        if (elementID >= 0) elementSpriteRenderer.sprite = GridOS.elements[elementID].sprite;
         else elementSpriteRenderer.sprite = null;
 
         GameManager.shotgunSurgery.ForceStartCoroutine(LightUp(GameManager.animationInfo.tileLightUpColor));

@@ -16,9 +16,6 @@ public struct AnimationInfo
 
 public class GameManager : MonoBehaviour
 {
-    public static HexGrid hexGrid;
-    public HexGrid I_hexGrid;
-
     public static AnimationInfo animationInfo;
     public AnimationInfo I_animationInfo;
 
@@ -30,7 +27,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        hexGrid = I_hexGrid;
         animationInfo = I_animationInfo;
         tvus = I_tvus;
         shotgunSurgery = I_shotgunSurgery;
@@ -38,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        HexTile ht = hexGrid.WorldPosToGrid(MainCamera.GetMouseWorld2DPoint());
+        HexTile ht = GridOS.hexGrid.WorldPosToGrid(MainCamera.GetMouseWorld2DPoint());
         if (ht != null)
         {
             for (int i = 0; i < 6; i++)
@@ -49,14 +45,17 @@ public class GameManager : MonoBehaviour
             if (Input.GetButtonDown("Fire1"))
             {
                 ht.UpdateElement(0);
-                GridElementManager.Run(ht);
+                GridOS.Run(ht);
             }
             else if (Input.GetButtonDown("Fire2"))
             {
                 ht.UpdateElement(1);
-                GridElementManager.Run(ht);
+                GridOS.Run(ht);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Z)) GridHistory.Undo();
+        else if (Input.GetKeyDown(KeyCode.Y)) GridHistory.Redo();
     }
 
 }

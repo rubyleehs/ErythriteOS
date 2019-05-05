@@ -6,7 +6,6 @@ public enum Hexinal { E = 0,NE = 1,NW = 2,W = 3,SW =  4,SE= 5};
 
 public class HexGrid : MonoBehaviour
 {
-    public GridElementManager gridElementManager;
     [HideInInspector]
     public new Transform transform;
     public Transform background;
@@ -14,19 +13,19 @@ public class HexGrid : MonoBehaviour
     public static HexTile[][] grid;
     public GameObject tileGO;
 
-    public int gridRadius;
-    public Vector2 tileDelta;
-    public Vector2 centerPos;
+    private int gridRadius;
+    private Vector2 tileDelta;
+    private Vector2 centerPos;
 
-    public void Awake()
+    public void Initialize(int gridRadius, float tileXDelta, Vector2 centerPos)
     {
         transform = GetComponent<Transform>();
-        tileDelta.y = tileDelta.x * Mathf.Cos(30 * Mathf.Deg2Rad);//
-        CreateGrid(gridRadius, tileDelta, centerPos);
-
+        this.gridRadius = gridRadius;
+        this.tileDelta = new Vector2(tileXDelta, tileXDelta * Mathf.Cos(30 * Mathf.Deg2Rad));
+        this.centerPos = centerPos;
     }
 
-    public void CreateGrid(int gridRadius, Vector2 tileDelta, Vector2 centerPos)
+    public void CreateGrid()
     {
         background.position = centerPos;
         background.localScale = Vector2.one * (gridRadius * 2 - 0.5f);

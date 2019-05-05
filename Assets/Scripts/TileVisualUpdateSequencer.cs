@@ -52,6 +52,6 @@ public class TileVisualUpdateSequencer : MonoBehaviour
 
     public static void AddToQueue(List<HexTile> l)
     {
-        queue.Add(l);
+        queue.Add(new List<HexTile>(l));
     }
 }
