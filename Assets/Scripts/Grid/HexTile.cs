@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public abstract class HexTile 
+public class HexTile 
 {
-    public Transform tile;
+    public Transform transform;
 
-    public Vector2 worldPos;
     public Vector2Int gridPos;
     protected int elementID;
 

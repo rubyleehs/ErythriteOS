@@ -14,7 +14,7 @@ public class HexGrid : MonoBehaviour
     protected Vector2 tileDelta;
     protected Vector2 centerPos;
 
-    public HexTile[][] grid;
+    protected Transform[][] gridTransforms;
 
     public virtual void Initialize(int gridRadius, float tileXDelta, Vector2 centerPos)
     {
@@ -22,6 +22,25 @@ public class HexGrid : MonoBehaviour
         this.gridRadius = gridRadius;
         this.tileDelta = new Vector2(tileXDelta, tileXDelta * Mathf.Cos(30 * Mathf.Deg2Rad));
         this.centerPos = centerPos;
+    }
+
+    public virtual void CreateGrid()
+    {
+        background.position = centerPos;
+        background.localScale = Vector2.one * (gridRadius * 2 - 0.5f);
+
+        Vector2[][] worldPos = CalGridWorldPosPositions(gridRadius, tileDelta, centerPos);
+
+        gridTransforms = new Transform[worldPos.Length][];
+
+        for (int y = 0; y < gridTransforms.Length; y++)
+        {
+            gridTransforms[y] = new Transform[worldPos[y].Length];
+            for (int x = 0; x < gridTransforms[y].Length; x++)
+            {
+                gridTransforms[y][x] = Instantiate(tileGO, worldPos[y][x], Quaternion.identity, this.transform).transform;
+            }
+        }
     }
 
     public static Vector2[][] CalGridWorldPosPositions(int radius, Vector2 tileDelta, Vector2 centerPos)

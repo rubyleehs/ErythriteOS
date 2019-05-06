@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class HexBoardTile: HexTile
 {
-    public HexBoardTile(Vector2 worldPos, Vector2Int gridPos, Transform tile)
+    public HexBoardTile(Transform transform, Vector2Int gridPos)
     {
-        this.tile = tile;
+        this.transform = transform;
 
-        this.worldPos = worldPos;
         this.gridPos = gridPos;
         this.adjTiles = new HexBoardTile[6];
 
         this.elementID = -1;
 
-        this.spriteRenderer = tile.GetComponent<SpriteRenderer>();
-        this.elementSpriteRenderer = tile.GetChild(0).GetComponent<SpriteRenderer>();
+        this.spriteRenderer = transform.GetComponent<SpriteRenderer>();
+        this.elementSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
 
         this.originalColor = spriteRenderer.color;
     }
@@ -39,7 +38,7 @@ public class HexBoardTile: HexTile
 
     public void UpdateVisuals()
     {
-        if (elementID >= 0) elementSpriteRenderer.sprite = GridOS.elements[elementID].sprite;
+        if (elementID >= 0) elementSpriteRenderer.sprite = BoardOS.elements[elementID].sprite;
         else elementSpriteRenderer.sprite = null;
 
         GameManager.shotgunSurgery.ForceStartCoroutine(LightUp(GameManager.animationInfo.tileLightUpColor));

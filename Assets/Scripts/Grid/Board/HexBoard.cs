@@ -6,23 +6,21 @@ public enum Hexinal { E = 0,NE = 1,NW = 2,W = 3,SW =  4,SE= 5};
 
 public class HexBoard : HexGrid
 {
-    public new HexBoardTile[][] grid;
+    public static HexBoardTile[][] grid;
 
     public override void CreateGrid()
     {
-        background.position = centerPos;
-        background.localScale = Vector2.one * (gridRadius * 2 - 0.5f);
-        Vector2[][] worldPos = CalGridWorldPosPositions(gridRadius, tileDelta, centerPos);
+        base.CreateGrid();
 
-        grid = new HexBoardTile[worldPos.Length][];
+        grid = new HexBoardTile[gridTransforms.Length][];
 
         for (int y = 0; y < grid.Length; y++)
         {
-            grid[y] = new HexBoardTile[worldPos[y].Length];
+            grid[y] = new HexBoardTile[gridTransforms[y].Length];
 
             for (int x = 0; x < grid[y].Length; x++)
             {
-                HexBoardTile hexTile = new HexBoardTile(worldPos[y][x], new Vector2Int(x, y), Instantiate(tileGO, worldPos[y][x], Quaternion.identity, this.transform).transform);
+                HexBoardTile hexTile = new HexBoardTile(gridTransforms[y][x], new Vector2Int(x, y));
                 if(x > 0)
                 {
                     hexTile.adjTiles[(int)Hexinal.W] = grid[y][x - 1];

@@ -9,7 +9,7 @@ public struct GridChange//have to be a struct to store by value;
     public int changedElementID;
 }
 
-public class HistoryManager : MonoBehaviour
+public class HistoryManager : MonoBehaviour //Managers history of the board & element used
 {
     private static List<List<GridChange>> gridHistory;
     private static List<GridChange> gridPresent;
@@ -52,12 +52,12 @@ public class HistoryManager : MonoBehaviour
     public static void Undo()
     {
         if (currentPointOfTime < 0) return;
-        GameManager.bvus.ForceComplete();
+        BoardOS.bvus.ForceComplete();
 
         for (int i = 0; i < gridHistory[currentPointOfTime].Count; i++)
         {
             GridChange change = gridHistory[currentPointOfTime][i];
-            HexBoardTile tile = GridOS.hexBoard.grid[change.gridPos.y][change.gridPos.x];
+            HexBoardTile tile = HexBoard.grid[change.gridPos.y][change.gridPos.x];
 
             tile.UpdateElement(change.originalElementID);
             tile.UpdateVisuals();
@@ -69,12 +69,12 @@ public class HistoryManager : MonoBehaviour
     public static void Redo()
     {
         if (currentPointOfTime >= gridHistory.Count - 1) return;
-        GameManager.bvus.ForceComplete();
+        BoardOS.bvus.ForceComplete();
 
         for (int i = 0; i < gridHistory[currentPointOfTime + 1].Count; i++)
         {
             GridChange change = gridHistory[currentPointOfTime + 1][i];
-            HexBoardTile tile = GridOS.hexBoard.grid[change.gridPos.y][change.gridPos.x];
+            HexBoardTile tile = HexBoard.grid[change.gridPos.y][change.gridPos.x];
 
             tile.UpdateElement(change.changedElementID);
             tile.UpdateVisuals();
