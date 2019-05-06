@@ -38,7 +38,11 @@ public class HexBoardTile: HexTile
 
     public void UpdateVisuals()
     {
-        if (elementID >= 0) elementSpriteRenderer.sprite = BoardOS.elements[elementID].sprite;
+        if (elementID >= 0)
+        {
+            elementSpriteRenderer.sprite = GridElementManager.elements[elementID].sprite;
+            elementSpriteRenderer.material = GridElementManager.elements[elementID].material;
+        }
         else elementSpriteRenderer.sprite = null;
 
         GameManager.shotgunSurgery.ForceStartCoroutine(LightUp(GameManager.animationInfo.tileLightUpColor));

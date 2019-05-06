@@ -11,5 +11,15 @@ public class InventoryTile : HexTile
         this.elementID = elementID;
         this.spriteRenderer = transform.GetComponent<SpriteRenderer>();
         this.elementSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+
+        if(elementID >= 0 && elementID < GridElementManager.elements.Length) elementSpriteRenderer.sprite = GridElementManager.elements[elementID].sprite;
+        ToggleOccupancy(true);
+    }
+
+    public void ToggleOccupancy(bool isOccupied)
+    {
+        if (elementID < 0 || elementID >= GridElementManager.elements.Length) return;
+        if (isOccupied) elementSpriteRenderer.material = GridElementManager.elements[elementID].material;
+        else elementSpriteRenderer.material = InventoryOS.usedMat;
     }
 }

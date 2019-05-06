@@ -173,7 +173,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   I_inventoryGrid: {fileID: 439452855}
-  I_elements: []
+  I_elements:
+  - {fileID: 11400000, guid: ef474ae3b63bf184bbbb0ff7b3164f2d, type: 2}
+  - {fileID: 11400000, guid: 16c218ce6e849504a838711f7ecff807, type: 2}
+  - {fileID: 11400000, guid: 740a9d3e24978e144b61c1bcdf56cccf, type: 2}
+  - {fileID: 11400000, guid: cbaea198cb056744ba72f72ac12d7bd9, type: 2}
+  I_usedMat: {fileID: 2100000, guid: b4d34863b1b20f94b8d164f15ef54bab, type: 2}
+  I_grayScaleMat: {fileID: 2100000, guid: 8bcf85bc19f949340a2b9f2b711e7092, type: 2}
   boardRadius: 4
   tileXDelta: 1
   centerPos: {x: -6, y: 2.5}
@@ -267,8 +273,9 @@ GameObject:
   m_Component:
   - component: {fileID: 817490148}
   - component: {fileID: 817490147}
-  - component: {fileID: 817490150}
+  - component: {fileID: 817490149}
   - component: {fileID: 817490152}
+  - component: {fileID: 817490150}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -308,6 +315,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &817490149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817490146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c4ee5d335bd20c4885b95b51d149585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  I_elements:
+  - {fileID: 11400000, guid: ef474ae3b63bf184bbbb0ff7b3164f2d, type: 2}
+  - {fileID: 11400000, guid: 16c218ce6e849504a838711f7ecff807, type: 2}
+  - {fileID: 11400000, guid: 740a9d3e24978e144b61c1bcdf56cccf, type: 2}
+  - {fileID: 11400000, guid: cbaea198cb056744ba72f72ac12d7bd9, type: 2}
 --- !u!114 &817490150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,11 +888,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   I_hexBoard: {fileID: 1819781636}
   I_bvus: {fileID: 1819781638}
-  I_elements:
-  - {fileID: 11400000, guid: 740a9d3e24978e144b61c1bcdf56cccf, type: 2}
-  - {fileID: 11400000, guid: 16c218ce6e849504a838711f7ecff807, type: 2}
-  - {fileID: 11400000, guid: cbaea198cb056744ba72f72ac12d7bd9, type: 2}
-  - {fileID: 11400000, guid: ef474ae3b63bf184bbbb0ff7b3164f2d, type: 2}
   boardRadius: 7
   tileXDelta: 1
   centerPos: {x: 3, y: 0}

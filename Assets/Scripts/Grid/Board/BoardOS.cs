@@ -11,10 +11,6 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
     public static BoardVisualUpdateSequencer bvus;
     public BoardVisualUpdateSequencer I_bvus;
 
-    public static GridElement[] elements;
-    public GridElement[] I_elements;
-
-
     [Header("Board Gen")]
     public int boardRadius;
     public float tileXDelta;
@@ -22,9 +18,6 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
 
     private void Awake()
     {
-        elements = I_elements;
-        for (int i = 0; i < elements.Length; i++) elements[i].id = i;
-
         hexBoard = I_hexBoard;
         bvus = I_bvus;
         hexBoard.Initialize(boardRadius, tileXDelta, centerPos);
@@ -38,7 +31,7 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
             int elementUsed = tile.ReadElementID();
             bvus.ForceComplete();
             tile.UpdateVisuals();
-            elements[elementUsed].Run(tile);
+            GridElementManager.elements[elementUsed].Run(tile);
             HistoryManager.AddPresentToHistory(elementUsed);
         }
     }
