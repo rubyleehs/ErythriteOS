@@ -7,5 +7,5 @@ public abstract class GridElement : ScriptableObject
     public int id;
     public Sprite sprite;
 
-    public abstract void Run(HexTile tile);
+    public abstract void Run(HexBoardTile tile);
 }

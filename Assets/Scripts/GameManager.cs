@@ -19,8 +19,8 @@ public class GameManager : MonoBehaviour
     public static AnimationInfo animationInfo;
     public AnimationInfo I_animationInfo;
 
-    public static TileVisualUpdateSequencer tvus;
-    public TileVisualUpdateSequencer I_tvus;
+    public static BoardVisualUpdateSequencer bvus;
+    public BoardVisualUpdateSequencer I_bvus;
 
     public static ShotgunSurgery shotgunSurgery;
     public ShotgunSurgery I_shotgunSurgery;
@@ -28,13 +28,13 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         animationInfo = I_animationInfo;
-        tvus = I_tvus;
+        bvus = I_bvus;
         shotgunSurgery = I_shotgunSurgery;
     }
 
     private void Update()
     {
-        HexTile ht = GridOS.hexGrid.WorldPosToGrid(MainCamera.GetMouseWorld2DPoint());
+        HexBoardTile ht = GridOS.hexBoard.WorldPosToGrid(MainCamera.GetMouseWorld2DPoint()) as HexBoardTile;
         if (ht != null)
         {
             for (int i = 0; i < 6; i++)
@@ -68,8 +68,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Z)) GridHistory.Undo();
-        else if (Input.GetKeyDown(KeyCode.Y)) GridHistory.Redo();
+        if (Input.GetKeyDown(KeyCode.Z)) HistoryManager.Undo();
+        else if (Input.GetKeyDown(KeyCode.Y)) HistoryManager.Redo();
     }
 
 }

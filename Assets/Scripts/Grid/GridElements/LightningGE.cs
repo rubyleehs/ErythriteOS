@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "GridElement/LightningGE")]
 public class LightningGE : GridElement
 {
-    public override void Run(HexTile tile)
+    public override void Run(HexBoardTile tile)
     {
-        HexTile runTile = tile;
+        HexBoardTile runTile = tile;
         bool nextIsRight = false;
         bool hasHitSomething = false;
 
@@ -26,7 +26,7 @@ public class LightningGE : GridElement
 
             nextIsRight = !nextIsRight;
 
-            TileVisualUpdateSequencer.AddToQueue(runTile);
+            BoardVisualUpdateSequencer.AddToQueue(runTile);
         }
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GridOS : MonoBehaviour
 {
-    [Header("Rerences")]
-    public static HexGrid hexGrid;
-    public HexGrid I_hexGrid;
+    [Header("Refrences")]
+    public static HexBoard hexBoard;
+    public HexBoard I_hexBoard;
 
     public static GridElement[] elements;
     public GridElement[] I_elements;
@@ -21,20 +21,20 @@ public class GridOS : MonoBehaviour
         elements = I_elements;
         for (int i = 0; i < elements.Length; i++) elements[i].id = i;
 
-        hexGrid = I_hexGrid;
-        hexGrid.Initialize(gridRadius, tileXDelta, centerPos);
-        hexGrid.CreateGrid();
+        hexBoard = I_hexBoard;
+        hexBoard.Initialize(gridRadius, tileXDelta, centerPos);
+        hexBoard.CreateGrid();
     }
 
-    public static void Run(HexTile tile)
+    public static void Run(HexBoardTile tile)
     {
         if (tile.ReadElementID() >= 0)
         {
-            Debug.Log(tile.ReadElementID());
-            GameManager.tvus.ForceComplete();
+            int elementUsed = tile.ReadElementID();
+            GameManager.bvus.ForceComplete();
             tile.UpdateVisuals();
-            elements[tile.ReadElementID()].Run(tile);
-            GridHistory.AddPresentToHistory();
+            elements[elementUsed].Run(tile);
+            HistoryManager.AddPresentToHistory(elementUsed);
         }
     }
 }

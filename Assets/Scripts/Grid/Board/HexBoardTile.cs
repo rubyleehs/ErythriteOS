@@ -2,40 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HexTile
+public class HexBoardTile: HexTile
 {
-    public HexTile(Vector2 worldPos, Vector2Int gridPos, Transform tile)
+    public HexBoardTile(Vector2 worldPos, Vector2Int gridPos, Transform tile)
     {
         this.tile = tile;
 
         this.worldPos = worldPos;
         this.gridPos = gridPos;
-        this.adjTiles = new HexTile[6];
+        this.adjTiles = new HexBoardTile[6];
 
         this.elementID = -1;
-        this.elementSpriteRenderer = tile.GetChild(0).GetComponent<SpriteRenderer>();
-        this.spriteRenderer = tile.GetComponent<SpriteRenderer>();
-        this.originalColor = spriteRenderer.color;
 
+        this.spriteRenderer = tile.GetComponent<SpriteRenderer>();
+        this.elementSpriteRenderer = tile.GetChild(0).GetComponent<SpriteRenderer>();
+
+        this.originalColor = spriteRenderer.color;
     }
 
-    public Transform tile;
-
-    public Vector2 worldPos;
-    public Vector2Int gridPos;
-    public HexTile[] adjTiles;
-
-    private int elementID;
-
-    private SpriteRenderer elementSpriteRenderer;
-    private SpriteRenderer spriteRenderer;
+    public HexBoardTile[] adjTiles;
     private Color originalColor;
 
     public void UpdateElement(int id)
     {
         if (elementID != id)
         {
-            GridHistory.AddToPresent(gridPos, elementID, id);
+            HistoryManager.AddToPresent(gridPos, elementID, id);
             elementID = id;
         }
     }

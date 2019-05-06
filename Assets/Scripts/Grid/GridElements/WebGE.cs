@@ -5,15 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "GridElement/WebGE")]
 public class WebGE : GridElement
 {
-    public override void Run(HexTile tile)
+    public override void Run(HexBoardTile tile)
     {
-        HexTile[] runTiles = new HexTile[6];
+        HexBoardTile[] runTiles = new HexBoardTile[6];
         tile.adjTiles.CopyTo(runTiles,0);
         bool isDone = false;
         while (!isDone)
         {
             isDone = true;
-            List<HexTile> visualUpdateTiles = new List<HexTile>();
+            List<HexBoardTile> visualUpdateTiles = new List<HexBoardTile>();
             for (int i = 0; i < 6; i++)
             {
                 if (runTiles[i] == null) continue;
@@ -29,7 +29,7 @@ public class WebGE : GridElement
                     else runTiles[i] = null;
                 }
             }
-            TileVisualUpdateSequencer.AddToQueue(visualUpdateTiles);
+            BoardVisualUpdateSequencer.AddToQueue(visualUpdateTiles);
         }
     }
 }

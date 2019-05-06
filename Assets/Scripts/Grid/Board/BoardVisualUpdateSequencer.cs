@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileVisualUpdateSequencer : MonoBehaviour
+public class BoardVisualUpdateSequencer : MonoBehaviour
 {
-    private static List<List<HexTile>> queue;
+    private static List<List<HexBoardTile>> queue;
 
     private float dt = 0;
 
     private void Awake()
     {
-        queue = new List<List<HexTile>>();
+        queue = new List<List<HexBoardTile>>();
     }
 
     private void Update()
@@ -45,13 +45,13 @@ public class TileVisualUpdateSequencer : MonoBehaviour
     }
 
 
-    public static void AddToQueue(HexTile tile)
+    public static void AddToQueue(HexBoardTile tile)
     {
-        queue.Add(new List<HexTile> { tile });
+        queue.Add(new List<HexBoardTile> { tile });
     }
 
-    public static void AddToQueue(List<HexTile> l)
+    public static void AddToQueue(List<HexBoardTile> l)
     {
-        queue.Add(new List<HexTile>(l));
+        queue.Add(new List<HexBoardTile>(l));
     }
 }
