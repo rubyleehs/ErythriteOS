@@ -27,10 +27,10 @@ public class GameManager : MonoBehaviour
         animationInfo = I_animationInfo;
         shotgunSurgery = I_shotgunSurgery;
     }
-
+    
     private void Update()
     {
-        HexBoardTile ht = BoardOS.hexBoard.WorldPosToGrid(MainCamera.GetMouseWorld2DPoint()) as HexBoardTile;
+        HexBoardTile ht = BoardOS.hexBoard.WorldPosToGrid(MainCamera.mousePos) as HexBoardTile;
         if (ht != null)
         {
             for (int i = 0; i < 6; i++)
@@ -63,9 +63,6 @@ public class GameManager : MonoBehaviour
                 Debug.Log(ht.ReadElementID());
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.Z)) HistoryManager.Undo();
-        else if (Input.GetKeyDown(KeyCode.Y)) HistoryManager.Redo();
     }
-
+    
 }

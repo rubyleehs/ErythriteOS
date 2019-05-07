@@ -29,7 +29,7 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
         if (tile.ReadElementID() >= 0)
         {
             int elementUsed = tile.ReadElementID();
-            bvus.ForceComplete();
+            //bvus.ForceComplete();
             tile.UpdateVisuals();
             GridElementManager.elements[elementUsed].Run(tile);
             HistoryManager.AddPresentToHistory(elementUsed);

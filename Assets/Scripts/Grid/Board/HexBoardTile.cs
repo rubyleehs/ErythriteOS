@@ -22,13 +22,15 @@ public class HexBoardTile: HexTile
     public HexBoardTile[] adjTiles;
     private Color originalColor;
 
-    public void UpdateElement(int id)
+    public bool UpdateElement(int id)
     {
         if (elementID != id)
         {
             HistoryManager.AddToPresent(gridPos, elementID, id);
             elementID = id;
+            return true;
         }
+        return false;
     }
 
     public int ReadElementID()

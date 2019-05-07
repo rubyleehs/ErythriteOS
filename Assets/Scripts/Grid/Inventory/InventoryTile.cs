@@ -13,13 +13,39 @@ public class InventoryTile : HexTile
         this.elementSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
 
         if(elementID >= 0 && elementID < GridElementManager.elements.Length) elementSpriteRenderer.sprite = GridElementManager.elements[elementID].sprite;
-        ToggleOccupancy(true);
+        UpdateAvailability(true);
     }
 
-    public void ToggleOccupancy(bool isOccupied)
+    public bool isLocked = false;
+    public bool isAvailable;
+
+    public int ReadID()
     {
-        if (elementID < 0 || elementID >= GridElementManager.elements.Length) return;
-        if (isOccupied) elementSpriteRenderer.material = GridElementManager.elements[elementID].material;
-        else elementSpriteRenderer.material = InventoryOS.usedMat;
+        return elementID;
+    }
+
+    public bool CheckAvailability()
+    {
+        Debug.Log(!isLocked + " | " + isAvailable);
+        return (!isLocked && isAvailable);     
+    }
+
+    public bool UpdateAvailability(bool setAvailable)
+    {
+        if (isLocked)
+        {
+            elementSpriteRenderer.material = InventoryOS.grayScaleMat;
+            return false;
+        }
+        else if (this.isAvailable == setAvailable) return false;
+        else if (elementID >= 0 && elementID < GridElementManager.elements.Length)
+        {
+            this.isAvailable = setAvailable;
+            if (isAvailable) elementSpriteRenderer.material = GridElementManager.elements[elementID].material;
+            else elementSpriteRenderer.material = InventoryOS.usedMat;
+
+            return true;
+        }
+        else return false;
     }
 }

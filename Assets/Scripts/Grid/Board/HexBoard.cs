@@ -6,7 +6,7 @@ public enum Hexinal { E = 0,NE = 1,NW = 2,W = 3,SW =  4,SE= 5};
 
 public class HexBoard : HexGrid
 {
-    public static HexBoardTile[][] grid;
+    public HexBoardTile[][] grid;
 
     public override void CreateGrid()
     {

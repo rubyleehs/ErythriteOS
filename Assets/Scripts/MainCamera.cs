@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MainCamera : MonoBehaviour {
 
-    //public static Vector2 mousePos;
+    public static Vector2 mousePos;
     public new static Camera camera;
     public new static Transform transform;
     public static float width;//world space
@@ -37,6 +37,11 @@ public class MainCamera : MonoBehaviour {
         AudioListener.volume = masterVolume;
     }
 
+    private void Update()
+    {
+        mousePos = GetMouseWorld2DPoint();
+    }
+
     public void SetHeight(float value)
     {
         height = value;
@@ -55,7 +60,7 @@ public class MainCamera : MonoBehaviour {
        SetPosition(new Vector3(position.x, position.y,camRig.position.z));
     }
 
-    public static Vector2 GetMouseWorld2DPoint()
+    protected static Vector2 GetMouseWorld2DPoint()
     {
         return camera.ScreenToWorldPoint(Input.mousePosition);
     }

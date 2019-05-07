@@ -52,12 +52,14 @@ public class HistoryManager : MonoBehaviour //Managers history of the board & el
     public static void Undo()
     {
         if (currentPointOfTime < 0) return;
+        Debug.Log("Undo");
         BoardOS.bvus.ForceComplete();
 
+        InventoryOS.inventoryGrid.ElementIdToGrid(elementUsed[currentPointOfTime]).UpdateAvailability(true);
         for (int i = 0; i < gridHistory[currentPointOfTime].Count; i++)
         {
             GridChange change = gridHistory[currentPointOfTime][i];
-            HexBoardTile tile = HexBoard.grid[change.gridPos.y][change.gridPos.x];
+            HexBoardTile tile = BoardOS.hexBoard.grid[change.gridPos.y][change.gridPos.x];
 
             tile.UpdateElement(change.originalElementID);
             tile.UpdateVisuals();
@@ -69,12 +71,14 @@ public class HistoryManager : MonoBehaviour //Managers history of the board & el
     public static void Redo()
     {
         if (currentPointOfTime >= gridHistory.Count - 1) return;
+        Debug.Log("Redo");
         BoardOS.bvus.ForceComplete();
 
+        InventoryOS.inventoryGrid.ElementIdToGrid(elementUsed[currentPointOfTime + 1]).UpdateAvailability(false);
         for (int i = 0; i < gridHistory[currentPointOfTime + 1].Count; i++)
         {
             GridChange change = gridHistory[currentPointOfTime + 1][i];
-            HexBoardTile tile = HexBoard.grid[change.gridPos.y][change.gridPos.x];
+            HexBoardTile tile = BoardOS.hexBoard.grid[change.gridPos.y][change.gridPos.x];
 
             tile.UpdateElement(change.changedElementID);
             tile.UpdateVisuals();
