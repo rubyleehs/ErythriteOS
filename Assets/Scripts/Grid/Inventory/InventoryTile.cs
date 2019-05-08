@@ -24,11 +24,6 @@ public class InventoryTile : HexTile
         return elementID;
     }
 
-    public bool CheckAvailability()
-    {
-        return (!isLocked && isAvailable);     
-    }
-
     public bool UpdateAvailability(bool setAvailable)
     {
         if (isLocked)

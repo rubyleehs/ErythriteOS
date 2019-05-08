@@ -10,8 +10,6 @@ public class PlayerInteractions : MonoBehaviour
     private Vector2 elementDeltaPos;
     private SpriteRenderer mouseElementSpriteRenderer;
 
-    private InventoryTile it;
-
     private void Awake()
     {
         mouseElementSpriteRenderer = mouseElementTransform.GetComponent<SpriteRenderer>();
@@ -30,48 +28,23 @@ public class PlayerInteractions : MonoBehaviour
     
     private void PickInventoryElement()
     {
-        it = InventoryOS.inventoryGrid.WorldPosToGrid(MainCamera.mousePos);
-        if (it != null && it.ReadID() >= 0)
+        InventoryTile it = InventoryOS.RequestUse(MainCamera.mousePos);
+        if(it != null)
         {
-            if (it.CheckAvailability())
-            {
-                BoardOS.bvus.ForceComplete();
-                elementID = it.ReadID();
-                it.UpdateAvailability(false);
-
-                elementDeltaPos = (Vector2)it.transform.position - MainCamera.mousePos;
-                mouseElementSpriteRenderer.sprite = GridElementManager.elements[elementID].sprite;
-            }
-            else
-            {
-                mouseElementSpriteRenderer.sprite = null;
-                return;
-            }
+            BoardOS.bvus.ForceComplete();
+            elementID = it.ReadID();
+            elementDeltaPos = (Vector2)it.transform.position - MainCamera.mousePos;
+            mouseElementSpriteRenderer.sprite = GridElementManager.elements[elementID].sprite;
         }
+        else mouseElementSpriteRenderer.sprite = null;
     }
 
     private void DropInventoryElement()
     {
-        if (it == null) return;
         mouseElementSpriteRenderer.sprite = null;
 
-        if (BoardOS.TryUpdateElement(mouseElementTransform.position, it.ReadID(), true)) return;
-        else it.UpdateAvailability(true);
-
-        /*
-        HexBoardTile ht = BoardOS.hexBoard.WorldPosToGrid(mouseElementTransform.position) as HexBoardTile;
-        mouseElementSpriteRenderer.sprite = null;
-        if (ht == null)
-        {
-            it.UpdateAvailability(true);
-            return;
-        }
-        else
-        {
-            ht.UpdateElement(it.ReadID());
-            BoardOS.Run(ht);
-        }
-        */
+        if (BoardOS.TryUpdateElement(mouseElementTransform.position, elementID, true)) HistoryManager.AddPresentToHistory(InventoryOS.ConfirmRequest());
+        else InventoryOS.CancelRequest();
     }
 }
 

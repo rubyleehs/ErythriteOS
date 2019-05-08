@@ -57,7 +57,6 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
             bvus.ForceComplete();
             tile.UpdateVisuals();
             GridElementManager.elements[elementUsed].Run(tile);
-            HistoryManager.AddPresentToHistory(elementUsed);
         }
     }
 }

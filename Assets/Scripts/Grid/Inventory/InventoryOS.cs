@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryOS : MonoBehaviour
 {
     [Header("Refrences")]
-    public static InventoryGrid inventoryGrid;
+    private static InventoryGrid inventoryGrid;
     public InventoryGrid I_inventoryGrid;
 
     public static GridElement[] elements;
@@ -22,6 +22,8 @@ public class InventoryOS : MonoBehaviour
     public float tileXDelta;
     public Vector2 centerPos;
 
+    private static InventoryTile request;
+
     private void Awake()
     {
         elements = I_elements;
@@ -31,5 +33,30 @@ public class InventoryOS : MonoBehaviour
 
         inventoryGrid.Initialize(boardRadius, tileXDelta, centerPos);
         inventoryGrid.CreateGrid();
+    }
+
+    public static InventoryTile RequestUse(Vector2 worldPos)
+    {
+        request = inventoryGrid.WorldPosToGrid(MainCamera.mousePos);
+        if (request == null) return null;
+        else if (request.UpdateAvailability(false)) return request;
+        else return null;
+    }
+
+    public static InventoryTile ConfirmRequest()
+    {
+        if (request == null) return null;
+        else
+        {
+            InventoryTile r = request;
+            request = null;
+            return r;
+        }
+    }
+
+    public static void CancelRequest()
+    {
+        request.UpdateAvailability(true);
+        request = null;
     }
 }
