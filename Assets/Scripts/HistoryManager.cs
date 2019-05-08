@@ -54,7 +54,7 @@ public class HistoryManager : MonoBehaviour //Managers history of the board & el
         Debug.Log("Undo");
         BoardOS.bvus.ForceComplete();
 
-        inventoryHistory[currentPointOfTime].UpdateAvailability(true);
+        if(inventoryHistory[currentPointOfTime] != null) inventoryHistory[currentPointOfTime].UpdateAvailability(true);
         for (int i = 0; i < gridHistory[currentPointOfTime].Count; i++)
         {
             GridChange change = gridHistory[currentPointOfTime][i];
@@ -70,7 +70,7 @@ public class HistoryManager : MonoBehaviour //Managers history of the board & el
         Debug.Log("Redo");
         BoardOS.bvus.ForceComplete();
 
-        inventoryHistory[currentPointOfTime + 1].UpdateAvailability(false);
+        if (inventoryHistory[currentPointOfTime] != null) inventoryHistory[currentPointOfTime + 1].UpdateAvailability(false);
         for (int i = 0; i < gridHistory[currentPointOfTime + 1].Count; i++)
         {
             GridChange change = gridHistory[currentPointOfTime + 1][i];
