@@ -30,39 +30,9 @@ public class GameManager : MonoBehaviour
     
     private void Update()
     {
-        HexBoardTile ht = BoardOS.hexBoard.WorldPosToGrid(MainCamera.mousePos) as HexBoardTile;
-        if (ht != null)
-        {
-            for (int i = 0; i < 6; i++)
-            {
-                if (ht.adjTiles[i] != null) Debug.DrawLine(ht.transform.position, ht.adjTiles[i].transform.position, Color.red, 1);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Alpha0))
-            {
-                ht.UpdateElement(0);
-                BoardOS.Run(ht);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                ht.UpdateElement(1);
-                BoardOS.Run(ht);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                ht.UpdateElement(2);
-                BoardOS.Run(ht);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                ht.UpdateElement(3);
-                BoardOS.Run(ht);
-            }
-            else if (Input.GetButtonDown("Fire1"))
-            {
-                Debug.Log(ht.ReadElementID());
-            }
-        }
-    }
-    
+        if (Input.GetKeyDown(KeyCode.Alpha0)) BoardOS.TryUpdateElement(MainCamera.mousePos, 0, true);
+        else if (Input.GetKeyDown(KeyCode.Alpha1)) BoardOS.TryUpdateElement(MainCamera.mousePos, 1, true);
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) BoardOS.TryUpdateElement(MainCamera.mousePos, 2, true);
+        else if (Input.GetKeyDown(KeyCode.Alpha3)) BoardOS.TryUpdateElement(MainCamera.mousePos, 3, true);
+    }  
 }

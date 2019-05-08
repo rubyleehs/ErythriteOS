@@ -59,10 +59,7 @@ public class HistoryManager : MonoBehaviour //Managers history of the board & el
         for (int i = 0; i < gridHistory[currentPointOfTime].Count; i++)
         {
             GridChange change = gridHistory[currentPointOfTime][i];
-            HexBoardTile tile = BoardOS.hexBoard.grid[change.gridPos.y][change.gridPos.x];
-
-            tile.UpdateElement(change.originalElementID);
-            tile.UpdateVisuals();
+            BoardOS.ForceChange(change.gridPos,change.originalElementID, false);
         }
         currentPointOfTime--;
         gridPresent.Clear();
@@ -78,10 +75,7 @@ public class HistoryManager : MonoBehaviour //Managers history of the board & el
         for (int i = 0; i < gridHistory[currentPointOfTime + 1].Count; i++)
         {
             GridChange change = gridHistory[currentPointOfTime + 1][i];
-            HexBoardTile tile = BoardOS.hexBoard.grid[change.gridPos.y][change.gridPos.x];
-
-            tile.UpdateElement(change.changedElementID);
-            tile.UpdateVisuals();
+            BoardOS.ForceChange(change.gridPos, change.changedElementID, false);
         }
         currentPointOfTime++;
         gridPresent.Clear();

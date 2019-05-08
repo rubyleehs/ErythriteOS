@@ -53,7 +53,12 @@ public class PlayerInteractions : MonoBehaviour
     private void DropInventoryElement()
     {
         if (it == null) return;
+        mouseElementSpriteRenderer.sprite = null;
 
+        if (BoardOS.TryUpdateElement(mouseElementTransform.position, it.ReadID(), true)) return;
+        else it.UpdateAvailability(true);
+
+        /*
         HexBoardTile ht = BoardOS.hexBoard.WorldPosToGrid(mouseElementTransform.position) as HexBoardTile;
         mouseElementSpriteRenderer.sprite = null;
         if (ht == null)
@@ -66,6 +71,7 @@ public class PlayerInteractions : MonoBehaviour
             ht.UpdateElement(it.ReadID());
             BoardOS.Run(ht);
         }
+        */
     }
 }
 

@@ -26,7 +26,6 @@ public class InventoryTile : HexTile
 
     public bool CheckAvailability()
     {
-        Debug.Log(!isLocked + " | " + isAvailable);
         return (!isLocked && isAvailable);     
     }
 
