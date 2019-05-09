@@ -178,6 +178,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 16c218ce6e849504a838711f7ecff807, type: 2}
   - {fileID: 11400000, guid: 740a9d3e24978e144b61c1bcdf56cccf, type: 2}
   - {fileID: 11400000, guid: cbaea198cb056744ba72f72ac12d7bd9, type: 2}
+  - {fileID: 11400000, guid: c4d5e857385bae74da26a289eb31df2c, type: 2}
+  - {fileID: 11400000, guid: a6f0fa07bde821240b7da7f20e9cc7b8, type: 2}
   I_usedMat: {fileID: 2100000, guid: b4d34863b1b20f94b8d164f15ef54bab, type: 2}
   I_grayScaleMat: {fileID: 2100000, guid: 8bcf85bc19f949340a2b9f2b711e7092, type: 2}
   boardRadius: 4
@@ -412,6 +414,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 16c218ce6e849504a838711f7ecff807, type: 2}
   - {fileID: 11400000, guid: 740a9d3e24978e144b61c1bcdf56cccf, type: 2}
   - {fileID: 11400000, guid: cbaea198cb056744ba72f72ac12d7bd9, type: 2}
+  - {fileID: 11400000, guid: c4d5e857385bae74da26a289eb31df2c, type: 2}
+  - {fileID: 11400000, guid: a6f0fa07bde821240b7da7f20e9cc7b8, type: 2}
 --- !u!114 &817490150
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,4 +8,9 @@ public class ShotgunSurgery : MonoBehaviour
     {
         StartCoroutine(coroutine);
     }
+
+    public void ForceStopCoroutine(IEnumerator coroutine)
+    {
+        StopCoroutine(coroutine);
+    }
 }

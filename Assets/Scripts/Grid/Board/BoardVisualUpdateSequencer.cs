@@ -45,6 +45,11 @@ public class BoardVisualUpdateSequencer : MonoBehaviour
     }
 
 
+    public static void AddToQueue(List<List<HexBoardTile>> list)
+    {
+        queue.AddRange(list);
+    }
+
     public static void AddToQueue(HexBoardTile tile)
     {
         queue.Add(new List<HexBoardTile> { tile });
