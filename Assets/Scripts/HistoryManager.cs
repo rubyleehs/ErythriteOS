@@ -15,7 +15,7 @@ public class HistoryManager : MonoBehaviour //Managers history of the board & el
     private static List<List<GridChange>> gridHistory;
     private static List<GridChange> gridPresent;
 
-    private static int currentPointOfTime = 0;
+    private static int currentPointOfTime = -1;
 
     private void Awake()
     {
@@ -51,7 +51,7 @@ public class HistoryManager : MonoBehaviour //Managers history of the board & el
     public static void Undo()
     {
         if (currentPointOfTime < 0) return;
-        Debug.Log("Undo");
+        Debug.Log("Undo | " + currentPointOfTime);
         BoardOS.bvus.ForceComplete();
 
         if(inventoryHistory[currentPointOfTime] != null) inventoryHistory[currentPointOfTime].UpdateAvailability(true);
@@ -67,10 +67,10 @@ public class HistoryManager : MonoBehaviour //Managers history of the board & el
     public static void Redo()
     {
         if (currentPointOfTime >= gridHistory.Count - 1) return;
-        Debug.Log("Redo");
+        Debug.Log("Redo | " + (currentPointOfTime + 1));
         BoardOS.bvus.ForceComplete();
 
-        if (inventoryHistory[currentPointOfTime] != null) inventoryHistory[currentPointOfTime + 1].UpdateAvailability(false);
+        if (inventoryHistory[currentPointOfTime + 1] != null) inventoryHistory[currentPointOfTime + 1].UpdateAvailability(false);
         for (int i = 0; i < gridHistory[currentPointOfTime + 1].Count; i++)
         {
             GridChange change = gridHistory[currentPointOfTime + 1][i];

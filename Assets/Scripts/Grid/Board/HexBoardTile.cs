@@ -17,7 +17,6 @@ public class HexBoardTile: HexTile
         this.elementSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
 
         this.originalColor = spriteRenderer.color;
-        this.fade = FadeElement();
     }
 
     public HexBoardTile[] adjTiles;
@@ -51,7 +50,11 @@ public class HexBoardTile: HexTile
             elementSpriteRenderer.sprite = GridElementManager.elements[elementID].sprite;
             elementSpriteRenderer.material = GridElementManager.elements[elementID].material;
         }
-        else GameManager.shotgunSurgery.ForceStartCoroutine(fade);
+        else
+        {
+            fade = FadeElement();
+            GameManager.shotgunSurgery.ForceStartCoroutine(fade);
+        }
 
         GameManager.shotgunSurgery.ForceStartCoroutine(LightUp(GameManager.animationInfo.tileLightUpColor));
 
@@ -66,10 +69,12 @@ public class HexBoardTile: HexTile
         spriteRenderer.color = color;
 
         float dt = 0;
+        float smoothProgress = 0;
         while(dt < GameManager.animationInfo.tileLightUpDuration)
         {
             dt += Time.deltaTime;
-            spriteRenderer.color = Color.Lerp(color, endColor, dt / GameManager.animationInfo.tileLightUpDuration);
+            smoothProgress = Mathf.SmoothStep(0, 1, dt / GameManager.animationInfo.tileLightUpDuration);
+            spriteRenderer.color = Color.Lerp(color, endColor, smoothProgress);
             yield return new WaitForEndOfFrame();
         }
 
@@ -83,10 +88,12 @@ public class HexBoardTile: HexTile
         endColor.a = 0;
 
         float dt = 0;
+        float smoothProgress = 0;
         while (dt < GameManager.animationInfo.tileLightUpDuration)
         {
             dt += Time.deltaTime;
-            elementSpriteRenderer.color = Color.Lerp(originalColor, endColor, dt / GameManager.animationInfo.tileLightUpDuration);
+            smoothProgress = Mathf.SmoothStep(0, 1, dt / GameManager.animationInfo.tileElementFadeDuration);
+            elementSpriteRenderer.color = Color.Lerp(originalColor, endColor, smoothProgress);
             yield return new WaitForEndOfFrame();
         }
 

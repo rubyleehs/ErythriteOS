@@ -8,6 +8,7 @@ public struct AnimationInfo
     public float staggerAnimDuration;
 
     public float tileLightUpDuration;
+    public float tileElementFadeDuration;
 
     public Color tileLightUpColor;
     public Color occupiedTileColor;
