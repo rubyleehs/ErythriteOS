@@ -6,7 +6,6 @@ public class PlayerInteractions : MonoBehaviour
 {
     public Transform mouseElementTransform;
 
-    private int elementID;
     private Vector2 elementDeltaPos;
     private SpriteRenderer mouseElementSpriteRenderer;
 
@@ -28,13 +27,11 @@ public class PlayerInteractions : MonoBehaviour
     
     private void PickInventoryElement()
     {
-        InventoryTile it = InventoryOS.RequestUse(MainCamera.mousePos);
-        if(it != null)
+        if(InventoryOS.RequestUse(MainCamera.mousePos))
         {
             BoardOS.bvus.ForceComplete();
-            elementID = it.ReadID();
-            elementDeltaPos = (Vector2)it.transform.position - MainCamera.mousePos;
-            mouseElementSpriteRenderer.sprite = GridElementManager.elements[elementID].sprite;
+            elementDeltaPos = (Vector2)InventoryOS.request.transform.position - MainCamera.mousePos;
+            mouseElementSpriteRenderer.sprite = GridElementManager.elements[InventoryOS.request.ReadID()].sprite;
         }
         else mouseElementSpriteRenderer.sprite = null;
     }
@@ -42,8 +39,9 @@ public class PlayerInteractions : MonoBehaviour
     private void DropInventoryElement()
     {
         mouseElementSpriteRenderer.sprite = null;
+        if (InventoryOS.request == null) return;
 
-        if (BoardOS.TryUpdateElement(mouseElementTransform.position, elementID, true)) HistoryManager.AddPresentToHistory(InventoryOS.ConfirmRequest());
+        if (BoardOS.TryUpdateElement(mouseElementTransform.position, InventoryOS.request.ReadID(), true)) HistoryManager.AddPresentToHistory(InventoryOS.ConfirmRequest());
         else InventoryOS.CancelRequest();
     }
 }

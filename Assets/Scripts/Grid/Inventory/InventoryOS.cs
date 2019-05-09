@@ -22,7 +22,7 @@ public class InventoryOS : MonoBehaviour
     public float tileXDelta;
     public Vector2 centerPos;
 
-    private static InventoryTile request;
+    public static InventoryTile request;
 
     private void Awake()
     {
@@ -35,12 +35,12 @@ public class InventoryOS : MonoBehaviour
         inventoryGrid.CreateGrid();
     }
 
-    public static InventoryTile RequestUse(Vector2 worldPos)
+    public static bool RequestUse(Vector2 worldPos)
     {
         request = inventoryGrid.WorldPosToGrid(MainCamera.mousePos);
-        if (request == null) return null;
-        else if (request.UpdateAvailability(false)) return request;
-        else return null;
+        if (request == null) return false;
+        else if (request.UpdateAvailability(false)) return true;
+        else return false;
     }
 
     public static InventoryTile ConfirmRequest()
