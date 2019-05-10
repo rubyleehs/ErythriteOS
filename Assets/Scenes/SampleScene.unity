@@ -182,6 +182,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a6f0fa07bde821240b7da7f20e9cc7b8, type: 2}
   - {fileID: 11400000, guid: 9341926611265294b8775700f8c2d5d3, type: 2}
   - {fileID: 11400000, guid: 99d16a6630480824ea541353522b267b, type: 2}
+  - {fileID: 11400000, guid: 51e0bd9ea7d739144b3d1c914035989d, type: 2}
+  - {fileID: 11400000, guid: 666d8fa243bf056468298a9bc1ea2a2f, type: 2}
   I_usedMat: {fileID: 2100000, guid: b4d34863b1b20f94b8d164f15ef54bab, type: 2}
   I_grayScaleMat: {fileID: 2100000, guid: 8bcf85bc19f949340a2b9f2b711e7092, type: 2}
   boardRadius: 4
@@ -384,7 +386,7 @@ MonoBehaviour:
     tileLightUpDuration: 1.15
     tileElementFadeDuration: 0.35
     tileLightUpColor: {r: 0.7387301, g: 0.52705586, b: 0.7924528, a: 1}
-    occupiedTileColor: {r: 0.5, g: 0, b: 1, a: 1}
+    occupiedTileColor: {r: 0.32987717, g: 0.26352793, b: 0.3962264, a: 1}
   I_shotgunSurgery: {fileID: 817490150}
 --- !u!4 &817490148
 Transform:
@@ -421,6 +423,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a6f0fa07bde821240b7da7f20e9cc7b8, type: 2}
   - {fileID: 11400000, guid: 9341926611265294b8775700f8c2d5d3, type: 2}
   - {fileID: 11400000, guid: 99d16a6630480824ea541353522b267b, type: 2}
+  - {fileID: 11400000, guid: 51e0bd9ea7d739144b3d1c914035989d, type: 2}
+  - {fileID: 11400000, guid: 666d8fa243bf056468298a9bc1ea2a2f, type: 2}
 --- !u!114 &817490150
 MonoBehaviour:
   m_ObjectHideFlags: 0
