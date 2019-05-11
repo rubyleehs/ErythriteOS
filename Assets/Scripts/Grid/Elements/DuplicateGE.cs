@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "GridElement/CopyGE")]
-public class CopyGE : GridElement
+[CreateAssetMenu(menuName = "GridElement/DuplicateGE")]
+public class DuplicateGE : GridElement
 {
     public override void Run(HexBoardTile tile)
     {
