@@ -17,16 +17,22 @@ public class HexBoardTile: HexTile
         this.elementSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
 
         this.originalColor = spriteRenderer.color;
+        visualElementId = new List<int>();
     }
 
     public HexBoardTile[] adjTiles;
     private Color originalColor;
     private IEnumerator fade;
+    public List<int> visualElementId;
 
     public bool UpdateElement(int id)
     {
+        visualElementId.Add(id);
         if (elementID != id)
         {
+            if (id == -1) GridElementManager.elements[elementID].Deathrattle(this);
+            else GridElementManager.elements[id].BattleCry(this);
+
             HistoryManager.AddToPresent(gridPos, elementID, id);
             elementID = id;
             return true;
@@ -41,29 +47,30 @@ public class HexBoardTile: HexTile
 
     public void UpdateVisuals()
     {
-        if (elementID >= 0)
+        GameManager.shotgunSurgery.ForceStartCoroutine(LightUp(GameManager.animationInfo.tileLightUpColor));
+
+        if (visualElementId.Count <= 0) return;
+        if (visualElementId[0] >= 0)
         {
             GameManager.shotgunSurgery.ForceStopCoroutine(fade);
             Color c = elementSpriteRenderer.color;
             c.a = 1;
             elementSpriteRenderer.color = c;
-            elementSpriteRenderer.sprite = GridElementManager.elements[elementID].sprite;
-            elementSpriteRenderer.material = GridElementManager.elements[elementID].material;
+            elementSpriteRenderer.sprite = GridElementManager.elements[visualElementId[0]].sprite;
+            elementSpriteRenderer.material = GridElementManager.elements[visualElementId[0]].material;
         }
         else
         {
             fade = FadeElement();
             GameManager.shotgunSurgery.ForceStartCoroutine(fade);
         }
-
-        GameManager.shotgunSurgery.ForceStartCoroutine(LightUp(GameManager.animationInfo.tileLightUpColor));
-
+        visualElementId.RemoveAt(0);
     }
    
     public IEnumerator LightUp(Color color)
     {
         Color endColor;
-        if (elementID == -1) endColor = originalColor;
+        if (visualElementId[0] == -1) endColor = originalColor;
         else endColor = GameManager.animationInfo.occupiedTileColor;
 
         spriteRenderer.color = color;

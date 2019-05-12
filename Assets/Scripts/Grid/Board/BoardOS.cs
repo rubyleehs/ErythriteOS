@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,10 +16,15 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
     public float tileXDelta;
     public Vector2 centerPos;
 
+    public static HashSet<HexBoardTile> endTurnEffectsTiles;
+    public static HashSet<HexBoardTile> endTurnEffectsTilesQueue;
+
     private void Awake()
     {
         hexBoard = I_hexBoard;
         bvus = I_bvus;
+        endTurnEffectsTiles = new HashSet<HexBoardTile>();
+        endTurnEffectsTilesQueue = new HashSet<HexBoardTile>();
         hexBoard.Initialize(boardRadius, tileXDelta, centerPos);
         hexBoard.CreateGrid();
     }
@@ -58,5 +63,25 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
             tile.UpdateVisuals();
             GridElementManager.elements[elementUsed].Run(tile);
         }
+        EndTurn();
+    }
+
+    public static void EndTurn()
+    {
+        for (int i = 0; i < endTurnEffectsTiles.Count; i++)
+        {
+            HexBoardTile ht = endTurnEffectsTiles.ElementAt(i);
+            if (ht.ReadElementID() != -1) GridElementManager.elements[ht.ReadElementID()].OnTurnEnd(ht);
+            else
+            {
+                Debug.Log("Invalid End Turn Effect!");
+            }
+        }
+
+        for (int i = 0; i < endTurnEffectsTilesQueue.Count; i++)
+        {
+            endTurnEffectsTiles.Add(endTurnEffectsTilesQueue.ElementAt(i));
+        }
+        endTurnEffectsTilesQueue.Clear();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PlayerInteractions : MonoBehaviour
 {
@@ -23,6 +24,14 @@ public class PlayerInteractions : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.Mouse0)) DropInventoryElement();
 
         mouseElementTransform.position = MainCamera.mousePos + elementDeltaPos;
+
+        /*
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            HexBoardTile ht = BoardOS.hexBoard.WorldPosToGrid(MainCamera.mousePos);
+            Debug.Log("id: " + ht.ReadElementID() + "vid:" + ht.visualElementId.Count);
+        }
+        */
     }
     
     private void PickInventoryElement()

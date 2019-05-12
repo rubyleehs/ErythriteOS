@@ -55,7 +55,7 @@ public class HistoryManager : MonoBehaviour //Managers history of the board & el
         BoardOS.bvus.ForceComplete();
 
         if(inventoryHistory[currentPointOfTime] != null) inventoryHistory[currentPointOfTime].UpdateAvailability(true);
-        for (int i = 0; i < gridHistory[currentPointOfTime].Count; i++)
+        for (int i = gridHistory[currentPointOfTime].Count -1; i >= 0; i--)
         {
             GridChange change = gridHistory[currentPointOfTime][i];
             BoardOS.ForceChange(change.gridPos,change.originalElementID, false);
