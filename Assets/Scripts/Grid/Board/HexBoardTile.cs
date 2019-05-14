@@ -70,7 +70,12 @@ public class HexBoardTile: HexTile
     public IEnumerator LightUp(Color color)
     {
         Color endColor;
-        if (visualElementId.Count <= 0 || visualElementId[0] == -1) endColor = originalColor;
+        if(visualElementId.Count <= 0)
+        {
+            if (elementID == -1) endColor = originalColor;
+            else endColor = GameManager.animationInfo.occupiedTileColor;
+        }
+        else if (visualElementId[0] == -1) endColor = originalColor;
         else endColor = GameManager.animationInfo.occupiedTileColor;
 
         spriteRenderer.color = color;

@@ -191,9 +191,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5e42eac04c425be4791625e16bd5fea4, type: 2}
   - {fileID: 11400000, guid: 4189faafc47cc154f81dcab93658c531, type: 2}
   - {fileID: 11400000, guid: 9feb5d16ff4e6a941980512a60b276b1, type: 2}
+  - {fileID: 11400000, guid: bc3b676d801def441a8f8ee6682f23c1, type: 2}
+  - {fileID: 11400000, guid: b7b645dd0ff830944b36299fdfe6dcb1, type: 2}
   I_usedMat: {fileID: 2100000, guid: b4d34863b1b20f94b8d164f15ef54bab, type: 2}
   I_grayScaleMat: {fileID: 2100000, guid: 8bcf85bc19f949340a2b9f2b711e7092, type: 2}
-  boardRadius: 4
+  boardRadius: 3
   tileXDelta: 1
   centerPos: {x: -6, y: 2.5}
 --- !u!1 &520762355
@@ -440,6 +442,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4189faafc47cc154f81dcab93658c531, type: 2}
   - {fileID: 11400000, guid: 9feb5d16ff4e6a941980512a60b276b1, type: 2}
   - {fileID: 11400000, guid: 34dce07c31ed7f94d88eb25a3cf40f8a, type: 2}
+  - {fileID: 11400000, guid: bc3b676d801def441a8f8ee6682f23c1, type: 2}
+  - {fileID: 11400000, guid: b7b645dd0ff830944b36299fdfe6dcb1, type: 2}
 --- !u!114 &817490150
 MonoBehaviour:
   m_ObjectHideFlags: 0
