@@ -27,6 +27,7 @@ public class HexBoardTile: HexTile
 
     public bool UpdateElement(int id)
     {
+        if (id < -1) id = -1;
         visualElementId.Add(id);
         if (elementID != id)
         {

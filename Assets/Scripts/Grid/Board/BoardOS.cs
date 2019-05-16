@@ -84,4 +84,65 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
         }
         endTurnEffectsTilesQueue.Clear();
     }
+
+    public static bool CheckElementPattern(int[][] pattern)
+    {
+        HexBoardTile runtile;
+        Vector2Int patternIndex;
+        for (int y = 0; y < hexBoard.grid.Length; y++)
+        {
+            for (int x = 0; x < hexBoard.grid[y].Length; x++)
+            {
+                patternIndex = Vector2Int.right;
+                runtile = hexBoard.grid[y][x];
+                while (runtile != null && (runtile.ReadElementID() == pattern[patternIndex.y][patternIndex.x] || (pattern[patternIndex.y][patternIndex.x] == -2 && runtile.ReadElementID() == -1)))
+                {
+                    if (patternIndex.x < pattern[patternIndex.y].Length - 1)//
+                    {
+                        patternIndex.x++;
+                        runtile = runtile.adjTiles[(int)Hexinal.E];
+                        if (pattern[patternIndex.y][patternIndex.x] >= -1)
+                        {
+                            runtile.UpdateElement(pattern[patternIndex.y][patternIndex.x]);
+                            runtile.UpdateVisuals();
+                        }
+                    }
+                    else if (patternIndex.y < pattern.Length - 1)
+                    {
+                        patternIndex.y++;
+                        patternIndex.x = 1;
+
+                        int d = pattern[patternIndex.y][0] - pattern[patternIndex.y - 1][0] - (pattern[patternIndex.y - 1].Length -2) + 1;
+                        Debug.Log(pattern[patternIndex.y][0] + " - " + pattern[patternIndex.y - 1][0] + " - " + (pattern[patternIndex.y - 1].Length - 2));
+                        runtile = runtile.adjTiles[(int)Hexinal.NW];
+                        if (patternIndex.y % 2 == 0) d--;
+                        Debug.Log(d);
+                        if (d >= 0)
+                        {
+                            for (int i = 0; i < d; i++)
+                            {
+                                if (runtile == null) break;
+                                runtile = runtile.adjTiles[(int)Hexinal.E];
+                            }
+                        }
+                        else
+                        {
+                            for (int i = d; i < 0; i++)
+                            {
+                                if (runtile == null) break;
+                                runtile = runtile.adjTiles[(int)Hexinal.W];
+                            }
+                        }
+                        if (pattern[patternIndex.y][patternIndex.x] >= -1)
+                        {
+                            runtile.UpdateElement(pattern[patternIndex.y][patternIndex.x]);
+                            runtile.UpdateVisuals();
+                        }
+                    }
+                    else return true;
+                }
+            }
+        }
+        return false;
+    }
 }
