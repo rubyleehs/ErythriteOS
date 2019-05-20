@@ -67,12 +67,12 @@ public class PuzzleShower : MonoBehaviour
 
         for (int dy = 0; dy < puzzle.Length; dy++)
         {
-            tilePos[dy] = new Vector2[puzzle[dy].Length -1];
-            for (int dx =1; dx < puzzle[dy].Length; dx++)
+            tilePos[dy] = new Vector2[puzzle[dy].Length - 1];
+            for (int dx = 1; dx < puzzle[dy].Length; dx++)
             {
                 float y = (dy - puzzle.Length * 0.5f + 0.5f) * tileDelta.y;
                 float x = (dx - 1 + puzzle[dy][0] - ((dy + 1) % 2 + 1) * 0.5f) * tileDelta.x;
-                tilePos[dy][dx - 1] = new Vector2(x,y);
+                tilePos[dy][dx - 1] = new Vector2(x, y);
                 tileXPosRange.x = Mathf.Min(tileXPosRange.x, x);
                 tileYPosRange.x = Mathf.Min(tileYPosRange.x, y);
                 tileXPosRange.y = Mathf.Max(tileXPosRange.y, x);
@@ -84,12 +84,12 @@ public class PuzzleShower : MonoBehaviour
         board = new Transform[tilePos.Length][];
         for (int dy = 0; dy < tilePos.Length; dy++)
         {
-            board[dy] =  new Transform[tilePos[dy].Length];
+            board[dy] = new Transform[tilePos[dy].Length];
             for (int dx = 0; dx < tilePos[dy].Length; dx++)
             {
                 tilePos[dy][dx] -= c;
                 furthestSqrDistFromCenter = Mathf.Max(furthestSqrDistFromCenter, Mathf.Pow(tilePos[dy][dx].x, 2) + Mathf.Pow(tilePos[dy][dx].y, 2));
-                if (puzzle[dy][dx + 1] != -2)board[dy][dx] = Instantiate(cellGO, (Vector3)tilePos[dy][dx] + transform.position, Quaternion.identity, elementParent).transform;
+                if (puzzle[dy][dx + 1] != -2) board[dy][dx] = Instantiate(cellGO, (Vector3)tilePos[dy][dx] + transform.position, Quaternion.identity, elementParent).transform;
                 if (puzzle[dy][dx + 1] >= 0) board[dy][dx].GetChild(0).GetComponent<SpriteRenderer>().sprite = GridElementManager.elements[puzzle[dy][dx + 1]].sprite;
             }
         }
