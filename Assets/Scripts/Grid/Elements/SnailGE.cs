@@ -28,19 +28,12 @@ public class SnailGE : GridElement
     {
         List<HexBoardTile> visualUpdateTiles = new List<HexBoardTile>();
         HexBoardTile eastTile = tile.adjTiles[((int)Hexinal.E)];
-        if (eastTile == null)
-        {
-            tile.UpdateElement(-1);
-            visualUpdateTiles.Add(tile);
-        }
+        if (eastTile == null) BoardOS.AddToEndTurnUpdateQueue(tile, -1);
         else if (eastTile.ReadElementID() == -1)
         {
-            tile.UpdateElement(-1);
-            eastTile.UpdateElement(id);
-            visualUpdateTiles.Add(tile);
-            visualUpdateTiles.Add(eastTile);
+            BoardOS.AddToEndTurnUpdateQueue(tile, -1);
+            BoardOS.AddToEndTurnUpdateQueue(eastTile, id);
         }
-        BoardVisualUpdateSequencer.JoinLastQueueMember(visualUpdateTiles);
     }
 
 }

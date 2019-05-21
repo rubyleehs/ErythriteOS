@@ -36,8 +36,7 @@ public class GunGE : GridElement
             if (runTile == null) return;
             else if (runTile.ReadElementID() == -1)
             {
-                runTile.UpdateElement(laserGE.id);
-                BoardVisualUpdateSequencer.JoinLastQueueMember(runTile);
+                BoardOS.AddToEndTurnUpdateQueue(runTile,laserGE.id);
                 return;
             }
             else if (runTile.ReadElementID() == laserGE.id) runTile = runTile.adjTiles[((int)Hexinal.E)];

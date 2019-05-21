@@ -19,6 +19,9 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
     public static HashSet<HexBoardTile> endTurnEffectsTiles;
     public static HashSet<HexBoardTile> endTurnEffectsTilesQueue;
 
+    private static List<HexBoardTile> endTurnUpdateQueue;
+    private static List<int> endTurnUpdateQueueId;
+
     private void Awake()
     {
         hexBoard = I_hexBoard;
@@ -27,6 +30,8 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
         endTurnEffectsTilesQueue = new HashSet<HexBoardTile>();
         hexBoard.Initialize(boardRadius, tileXDelta, centerPos);
         hexBoard.CreateGrid();
+        endTurnUpdateQueue = new List<HexBoardTile>();
+        endTurnUpdateQueueId = new List<int>();
     }
 
     public static bool TryUpdateElement(Vector2 worldPos, int id, bool runUpdated)
@@ -68,7 +73,6 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
 
     public static void EndTurn()
     {
-        BoardVisualUpdateSequencer.AddToQueue((HexBoardTile)null);
         for (int i = 0; i < endTurnEffectsTiles.Count; i++)
         {
             HexBoardTile ht = endTurnEffectsTiles.ElementAt(i);
@@ -79,11 +83,22 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
             }
         }
 
+        for (int i = 0; i < endTurnUpdateQueue.Count; i++) endTurnUpdateQueue[i].UpdateElement(endTurnUpdateQueueId[i]);
+        BoardVisualUpdateSequencer.AddToQueue(endTurnUpdateQueue);
+
         for (int i = 0; i < endTurnEffectsTilesQueue.Count; i++)
         {
             endTurnEffectsTiles.Add(endTurnEffectsTilesQueue.ElementAt(i));
         }
         endTurnEffectsTilesQueue.Clear();
+        endTurnUpdateQueue.Clear();
+        endTurnUpdateQueueId.Clear();
+    }
+
+    public static void AddToEndTurnUpdateQueue(HexBoardTile tile, int id)
+    {
+        endTurnUpdateQueue.Add(tile);
+        endTurnUpdateQueueId.Add(id);
     }
 
     public static bool CheckElementPattern(int[][] pattern)
