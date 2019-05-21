@@ -68,6 +68,7 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
 
     public static void EndTurn()
     {
+        BoardVisualUpdateSequencer.AddToQueue((HexBoardTile)null);
         for (int i = 0; i < endTurnEffectsTiles.Count; i++)
         {
             HexBoardTile ht = endTurnEffectsTiles.ElementAt(i);

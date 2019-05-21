@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BombGE
   m_EditorClassIdentifier: 
   id: 6
-  sprite: {fileID: 21300000, guid: 8a75a7e7630bc194b858215927864772, type: 3}
-  material: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  sprite: {fileID: 21300000, guid: 55682ca23c062b64abc7beee69b34e9d, type: 3}
+  material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}

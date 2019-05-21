@@ -40,7 +40,7 @@ public class SnailGE : GridElement
             visualUpdateTiles.Add(tile);
             visualUpdateTiles.Add(eastTile);
         }
-        BoardVisualUpdateSequencer.AddToQueue(visualUpdateTiles);
+        BoardVisualUpdateSequencer.JoinLastQueueMember(visualUpdateTiles);
     }
 
 }

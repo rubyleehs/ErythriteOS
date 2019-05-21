@@ -59,4 +59,16 @@ public class BoardVisualUpdateSequencer : MonoBehaviour
     {
         queue.Add(new List<HexBoardTile>(l));
     }
+
+    public static void JoinLastQueueMember(HexBoardTile tile)
+    {
+        if (queue.Count == 0) queue.Add(null);
+        queue[queue.Count - 1].Add(tile);
+    }
+
+    public static void JoinLastQueueMember(List<HexBoardTile> l)
+    {
+        if (queue.Count == 0) queue.Add(null);
+        queue[queue.Count - 1].AddRange(l);
+    }
 }

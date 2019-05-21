@@ -32,6 +32,7 @@ public class CopyUpGE : GridElement
                 {
                     rowDone = false;
                     idToCopy = runTiles[0].ReadElementID();
+                    runTiles[0].UpdateElement(idToCopy);
                     visualUpdateTiles.Add(runTiles[0]);
                     runTiles[0] = runTiles[0].adjTiles[(int)Hexinal.E];
                 }
