@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af0b2005a3b1c5d4b806c6ee3b191191, type: 3}
   m_Name: PSlantClearGE
   m_EditorClassIdentifier: 
-  id: 0
-  sprite: {fileID: 21300000, guid: 123e41a3884025e4ca12b681c246b836, type: 3}
+  id: 13
+  sprite: {fileID: 21300000, guid: eb601e598bc7f5a46af2675581a8c0e0, type: 3}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}

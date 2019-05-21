@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6883ac0990999f4a8775b79541bd314, type: 3}
   m_Name: LaserGE
   m_EditorClassIdentifier: 
-  id: 0
-  sprite: {fileID: 21300000, guid: 8114ce5c67f87a14189789ba57d3d095, type: 3}
+  id: 17
+  sprite: {fileID: 21300000, guid: 898cc736f86f87b4cb4269b183d2e472, type: 3}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bed0b20cb33cda40abb723f71284636, type: 3}
   m_Name: PushGE
   m_EditorClassIdentifier: 
-  id: 0
-  sprite: {fileID: 21300000, guid: 23640c2512dafc840a8dd5ca2fc7f1a6, type: 3}
+  id: 4
+  sprite: {fileID: 21300000, guid: fc831cb725e77594382e745dc097e9f3, type: 3}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}

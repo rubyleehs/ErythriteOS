@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: WebGE
   m_EditorClassIdentifier: 
   id: 3
-  sprite: {fileID: 21300000, guid: 793ea7e67e6fba942a3e7ca72285a834, type: 3}
+  sprite: {fileID: 21300000, guid: 3ac4a5e509a6117409a33d7951960fe5, type: 3}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}

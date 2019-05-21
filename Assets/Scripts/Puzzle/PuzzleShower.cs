@@ -6,8 +6,6 @@ using System.Linq;
 public class PuzzleShower : MonoBehaviour
 {
     public GameObject cellGO;
-    [TextArea]
-    public string ps;
 
     public float tileXDelta;
     public int[][] puzzle;
@@ -18,12 +16,6 @@ public class PuzzleShower : MonoBehaviour
     private new Transform transform;
     private Transform[][] board;
 
-    private void Awake()
-    {
-        Initialize();
-        DeserializePuzzleString(ps, true);
-        ShowPuzzle();
-    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
@@ -32,13 +24,20 @@ public class PuzzleShower : MonoBehaviour
         }
     }
 
-    private void Initialize()
+    public void Initialize()
     {
         tileDelta = new Vector2(tileXDelta, tileXDelta * Mathf.Cos(30 * Mathf.Deg2Rad));
         transform = GetComponent<Transform>();
     }
 
-    public void DeserializePuzzleString(string s, bool flipY)
+    public void SetPuzzle(Puzzle puzzle)
+    {
+        Clear();
+        DeserializePuzzleString(puzzle.code, true);
+        ShowPuzzle();
+    }
+
+    protected void DeserializePuzzleString(string s, bool flipY)
     {
         //top to bottom
         //start with offset , then ids seperated by "," and end with '\n'
@@ -56,7 +55,22 @@ public class PuzzleShower : MonoBehaviour
         if (flipY) Array.Reverse(puzzle);
     }
 
-    public void ShowPuzzle()
+    protected void Clear()
+    {
+        if (board == null) return;
+
+        for (int y = 0; y < board.Length; y++)
+        {
+            for (int x = 0; x < board[y].Length; x++)
+            {
+                if (board[y][x] == null) continue;
+                //board[y][x].gameObject.SetActive(false);
+                Destroy(board[y][x].gameObject); //pool me!;
+            }
+        }
+    }
+
+    protected void ShowPuzzle()
     {
         elementParent.localPosition = Vector3.zero;
         elementParent.localScale = Vector3.one;
@@ -90,7 +104,12 @@ public class PuzzleShower : MonoBehaviour
                 tilePos[dy][dx] -= c;
                 furthestSqrDistFromCenter = Mathf.Max(furthestSqrDistFromCenter, Mathf.Pow(tilePos[dy][dx].x, 2) + Mathf.Pow(tilePos[dy][dx].y, 2));
                 if (puzzle[dy][dx + 1] != -2) board[dy][dx] = Instantiate(cellGO, (Vector3)tilePos[dy][dx] + transform.position, Quaternion.identity, elementParent).transform;
-                if (puzzle[dy][dx + 1] >= 0) board[dy][dx].GetChild(0).GetComponent<SpriteRenderer>().sprite = GridElementManager.elements[puzzle[dy][dx + 1]].sprite;
+
+                if (puzzle[dy][dx + 1] >= 0)
+                {
+                    board[dy][dx].GetChild(0).GetComponent<SpriteRenderer>().material = GridElementManager.elements[puzzle[dy][dx + 1]].material;
+                    board[dy][dx].GetChild(0).GetComponent<SpriteRenderer>().sprite = GridElementManager.elements[puzzle[dy][dx + 1]].sprite;
+                }
             }
         }
         if (furthestSqrDistFromCenter > tileMaxRadiusFromCenter * tileMaxRadiusFromCenter)

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d54ed325d842b459a92163da5c5cc0, type: 3}
   m_Name: ReflectGE
   m_EditorClassIdentifier: 
-  id: 0
-  sprite: {fileID: 21300000, guid: 123e41a3884025e4ca12b681c246b836, type: 3}
+  id: 10
+  sprite: {fileID: 21300000, guid: ef6b581cdab7c554cbecc974d04799c2, type: 3}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}

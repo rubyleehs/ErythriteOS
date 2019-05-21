@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RotateGE
   m_EditorClassIdentifier: 
   id: 1
-  sprite: {fileID: 21300000, guid: 23640c2512dafc840a8dd5ca2fc7f1a6, type: 3}
+  sprite: {fileID: 21300000, guid: 65b6e092519641943ba8f99000086da1, type: 3}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}

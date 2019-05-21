@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc2bcc365453e5d40ba20bb008dd54f5, type: 3}
   m_Name: GunGE
   m_EditorClassIdentifier: 
-  id: 0
-  sprite: {fileID: 21300000, guid: 793ea7e67e6fba942a3e7ca72285a834, type: 3}
+  id: 16
+  sprite: {fileID: 21300000, guid: 8084624ce30b99949bfa73d35d3f1051, type: 3}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   laserGE: {fileID: 11400000, guid: 34dce07c31ed7f94d88eb25a3cf40f8a, type: 2}

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37eb6c47958414f4e800c1751cdfa823, type: 3}
   m_Name: BombGE
   m_EditorClassIdentifier: 
-  id: 0
-  sprite: {fileID: 21300000, guid: 8114ce5c67f87a14189789ba57d3d095, type: 3}
+  id: 6
+  sprite: {fileID: 21300000, guid: 8a75a7e7630bc194b858215927864772, type: 3}
   material: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}

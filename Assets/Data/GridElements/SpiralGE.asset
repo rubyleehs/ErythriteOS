@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SpiralGE
   m_EditorClassIdentifier: 
   id: 2
-  sprite: {fileID: 21300000, guid: 8114ce5c67f87a14189789ba57d3d095, type: 3}
+  sprite: {fileID: 21300000, guid: 77e76d07933d46e40af4b4528b32c4a3, type: 3}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}

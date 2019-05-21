@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: LightningGE
   m_EditorClassIdentifier: 
   id: 0
-  sprite: {fileID: 21300000, guid: 123e41a3884025e4ca12b681c246b836, type: 3}
+  sprite: {fileID: 21300000, guid: 92fc30e85b16aad49964eed88a13d57f, type: 3}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}

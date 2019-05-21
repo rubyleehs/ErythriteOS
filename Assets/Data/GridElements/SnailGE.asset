@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SnailGE
   m_EditorClassIdentifier: 
   id: 15
-  sprite: {fileID: 21300000, guid: f7a99f4469407f0499b9aea3c5f3f184, type: 3}
+  sprite: {fileID: 21300000, guid: 60e39251c4b3bf14d8f7e912eda3ba4f, type: 3}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}

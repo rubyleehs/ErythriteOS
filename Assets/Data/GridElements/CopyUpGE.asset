@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b651b27e87f065b47bd4b8c766503c92, type: 3}
   m_Name: CopyUpGE
   m_EditorClassIdentifier: 
-  id: 0
-  sprite: {fileID: 21300000, guid: 793ea7e67e6fba942a3e7ca72285a834, type: 3}
+  id: 12
+  sprite: {fileID: 21300000, guid: 8bf1a9f6beada234ba1dacf3d37ff82c, type: 3}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}

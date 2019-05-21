@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8003e51ecfbdf994b9b60fd14a96d6d2, type: 3}
   m_Name: FloodGE
   m_EditorClassIdentifier: 
-  id: 0
-  sprite: {fileID: 21300000, guid: 8114ce5c67f87a14189789ba57d3d095, type: 3}
+  id: 8
+  sprite: {fileID: 21300000, guid: 744144c836ef84845ac0852632daf2c8, type: 3}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}

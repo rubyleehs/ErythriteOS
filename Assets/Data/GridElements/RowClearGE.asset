@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 257add1fc6eee0644b2c2b3408aa9323, type: 3}
   m_Name: RowClearGE
   m_EditorClassIdentifier: 
-  id: 0
-  sprite: {fileID: 21300000, guid: 123e41a3884025e4ca12b681c246b836, type: 3}
+  id: 9
+  sprite: {fileID: 21300000, guid: 74f7de908c04fbd478fae43afeff4eb0, type: 3}
   material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
