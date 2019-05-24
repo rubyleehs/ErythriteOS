@@ -52,11 +52,13 @@ public class BoardVisualUpdateSequencer : MonoBehaviour
 
     public static void AddToQueue(HexBoardTile tile)
     {
+        if (tile == null) return;
         queue.Add(new List<HexBoardTile> { tile });
     }
 
     public static void AddToQueue(List<HexBoardTile> l)
     {
+        if(l.Count == 0) return;
         queue.Add(new List<HexBoardTile>(l));
     }
 

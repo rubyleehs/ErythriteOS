@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac2e9087995a2ba42895866d051311c6, type: 3}
   m_Name: SnailTrain
   m_EditorClassIdentifier: 
-  code: 
+  code: 0 15 -1 15 -1 15 -1 15
+  sprite: {fileID: 0}

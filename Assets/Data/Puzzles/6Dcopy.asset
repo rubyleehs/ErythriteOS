@@ -12,4 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac2e9087995a2ba42895866d051311c6, type: 3}
   m_Name: 6Dcopy
   m_EditorClassIdentifier: 
-  code: 
+  code: '0 12 -1 12
+
+    -1 -1 -1 -1 -1
+
+    -1 -1 11 -1 11 -1
+
+    -1 -1 -1 -1 -1
+
+    0 12 -1 12'
+  sprite: {fileID: 0}

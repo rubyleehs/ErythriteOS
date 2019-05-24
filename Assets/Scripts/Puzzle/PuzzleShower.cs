@@ -16,14 +16,6 @@ public class PuzzleShower : MonoBehaviour
     private new Transform transform;
     private Transform[][] board;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            Debug.Log(BoardOS.CheckElementPattern(puzzle));
-        }
-    }
-
     public void Initialize()
     {
         tileDelta = new Vector2(tileXDelta, tileXDelta * Mathf.Cos(30 * Mathf.Deg2Rad));
@@ -34,7 +26,7 @@ public class PuzzleShower : MonoBehaviour
     {
         Clear();
         DeserializePuzzleString(puzzle.code, true);
-        ShowPuzzle();
+        ShowPuzzle(puzzle.sprite);
     }
 
     protected void DeserializePuzzleString(string s, bool flipY)
@@ -70,10 +62,20 @@ public class PuzzleShower : MonoBehaviour
         }
     }
 
-    protected void ShowPuzzle()
+    protected void ShowPuzzle(Sprite sprite)
     {
         elementParent.localPosition = Vector3.zero;
         elementParent.localScale = Vector3.one;
+
+        if (sprite != null)
+        {
+            board = new Transform[1][];
+            board[0] = new Transform[1];
+            board[0][0] = Instantiate(cellGO, transform.position, Quaternion.identity, elementParent).transform;
+            board[0][0].GetComponent<SpriteRenderer>().color = Color.white;
+            board[0][0].GetComponent<SpriteRenderer>().sprite = sprite;
+            return;
+        }
 
         Vector2[][] tilePos = new Vector2[puzzle.Length][];
         Vector2 tileXPosRange = Vector2.zero;

@@ -71,7 +71,10 @@ public class DeleteSelectedGE : GridElement
         //======
         for (int i = 0; i < 6; i++)
         {
-            if (selectedTile[i] != null) BoardVisualUpdateSequencer.AddToQueue(selectedTile[i]);
+            if (selectedTile[i] != null)
+            {
+                BoardVisualUpdateSequencer.AddToQueue(selectedTile[i]);
+            }
             if (selectedId[i] != -1 && selectedTile[i].ReadElementID() != -1)
             {
                 for (int a = 0; a < allSelected[i].Count; a++)
@@ -80,6 +83,7 @@ public class DeleteSelectedGE : GridElement
                 }
                 BoardVisualUpdateSequencer.AddToQueue(allSelected[i]);
             }
+            if (selectedId[i] == id) return;
         }
     }
 

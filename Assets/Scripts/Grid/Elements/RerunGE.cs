@@ -11,6 +11,7 @@ public class RerunGE : GridElement
         if (tile2run != null)
         {
             BoardVisualUpdateSequencer.AddToQueue(tile2run);
+            tile2run.UpdateElement(tile2run.ReadElementID());
             if (tile2run.ReadElementID() >= 0) GridElementManager.elements[tile2run.ReadElementID()].Run(tile2run);
         }
     }

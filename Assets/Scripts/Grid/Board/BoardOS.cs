@@ -117,11 +117,13 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
                     {
                         patternIndex.x++;
                         runtile = runtile.adjTiles[(int)Hexinal.E];
+                        /*
                         if (pattern[patternIndex.y][patternIndex.x] >= -1)
                         {
                             runtile.UpdateElement(pattern[patternIndex.y][patternIndex.x]);
                             runtile.UpdateVisuals();
                         }
+                        */
                     }
                     else if (patternIndex.y < pattern.Length - 1)
                     {
@@ -149,11 +151,13 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
                                 runtile = runtile.adjTiles[(int)Hexinal.W];
                             }
                         }
+                        /*
                         if (pattern[patternIndex.y][patternIndex.x] >= -1)
                         {
                             runtile.UpdateElement(pattern[patternIndex.y][patternIndex.x]);
                             runtile.UpdateVisuals();
                         }
+                        */
                     }
                     else return true;
                 }

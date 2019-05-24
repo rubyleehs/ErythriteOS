@@ -16,7 +16,7 @@ public class PuzzleManager : MonoBehaviour
     [HideInInspector]
     public SpriteRenderer[] levelIndicators;
 
-    protected int[] isSolved;
+    public static int[] isSolved;
 
     [HideInInspector]
     public int currentPuzzleIndex = 0;
@@ -38,22 +38,42 @@ public class PuzzleManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.RightArrow)) ChangePuzzle(1);
         else if (Input.GetKeyDown(KeyCode.LeftArrow)) ChangePuzzle(-1);
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (BoardOS.CheckElementPattern(puzzleShower.puzzle)) SolvePuzzle();
+        }
+    }
+
+    public void SolvePuzzle()
+    {
+        if (puzzles[currentPuzzleIndex].CheckWinCondition())
+        {
+            isSolved[currentPuzzleIndex]++;
+            levelIndicators[currentPuzzleIndex].color = Color.Lerp(selectedColor, indicatorColor[isSolved[currentPuzzleIndex]], 0.4f);
+            Debug.Log("sucess!");
+        }
     }
 
     public void SetPuzzle(int index)
     {
         levelIndicators[currentPuzzleIndex].color = indicatorColor[isSolved[currentPuzzleIndex]];
-        currentPuzzleIndex = Mathf.Clamp(index, 0, puzzles.Length - 1);
+        currentPuzzleIndex = index;
+        while (currentPuzzleIndex < 0) currentPuzzleIndex += puzzles.Length;
+        while (currentPuzzleIndex >= puzzles.Length) currentPuzzleIndex -= puzzles.Length;
+
         puzzleShower.SetPuzzle(puzzles[currentPuzzleIndex]);
-        levelIndicators[currentPuzzleIndex].color = selectedColor;
+        levelIndicators[currentPuzzleIndex].color = Color.Lerp(selectedColor, indicatorColor[isSolved[currentPuzzleIndex]], 0.4f);
     }
 
     public void ChangePuzzle(int delta)
     {
         levelIndicators[currentPuzzleIndex].color = indicatorColor[isSolved[currentPuzzleIndex]];
-        currentPuzzleIndex = Mathf.Clamp(currentPuzzleIndex + delta, 0, puzzles.Length - 1);
+        currentPuzzleIndex += delta;
+        while (currentPuzzleIndex < 0) currentPuzzleIndex += puzzles.Length;
+        while (currentPuzzleIndex >= puzzles.Length) currentPuzzleIndex -= puzzles.Length;
         puzzleShower.SetPuzzle(puzzles[currentPuzzleIndex]);
-        levelIndicators[currentPuzzleIndex].color = selectedColor;
+        levelIndicators[currentPuzzleIndex].color = Color.Lerp(selectedColor, indicatorColor[isSolved[currentPuzzleIndex]], 0.4f);//
     }
 
     public void SpawnLevelIndicators()
