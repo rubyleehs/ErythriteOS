@@ -26,7 +26,7 @@ public class PuzzleShower : MonoBehaviour
     {
         Clear();
         DeserializePuzzleString(puzzle.code, true);
-        ShowPuzzle(puzzle.sprite);
+        ShowPuzzle(puzzle.go);
     }
 
     protected void DeserializePuzzleString(string s, bool flipY)
@@ -62,18 +62,18 @@ public class PuzzleShower : MonoBehaviour
         }
     }
 
-    protected void ShowPuzzle(Sprite sprite)
+    protected void ShowPuzzle(GameObject go)
     {
         elementParent.localPosition = Vector3.zero;
         elementParent.localScale = Vector3.one;
 
-        if (sprite != null)
+        if (go != null)
         {
             board = new Transform[1][];
             board[0] = new Transform[1];
-            board[0][0] = Instantiate(cellGO, transform.position, Quaternion.identity, elementParent).transform;
-            board[0][0].GetComponent<SpriteRenderer>().color = Color.white;
-            board[0][0].GetComponent<SpriteRenderer>().sprite = sprite;
+            board[0][0] = Instantiate(go, transform.position, Quaternion.identity, elementParent).transform;
+            //board[0][0].GetComponent<SpriteRenderer>().color = Color.white;
+            //board[0][0].GetComponent<SpriteRenderer>().sprite = sprite;
             return;
         }
 

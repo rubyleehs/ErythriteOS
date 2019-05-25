@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: EEPuzzle
   m_EditorClassIdentifier: 
   code: -1 -1
-  sprite: {fileID: 0}
+  go: {fileID: 1160795868519302067, guid: ef816b8305a69d84784db34f1362321a, type: 3}

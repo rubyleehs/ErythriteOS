@@ -8,7 +8,7 @@ public class Puzzle : ScriptableObject
     [TextArea]
     public string code;
 
-    public Sprite sprite;
+    public GameObject go;
 
     public virtual bool CheckWinCondition()
     {

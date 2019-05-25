@@ -6,6 +6,7 @@ public class PuzzleManager : MonoBehaviour
 {
     public Puzzle[] puzzles;
     public PuzzleShower puzzleShower;
+    public Transform indicatorParent;
     public GameObject levelIndicatorGO;
 
 
@@ -88,7 +89,7 @@ public class PuzzleManager : MonoBehaviour
             Vector2 end = Quaternion.Euler(Vector3.forward * ((side + 1) * 60 - 30)) * Vector2.down * radius;
             float rot = side * 60;
             if (column == 0) rot -= 30;
-            levelIndicators[i] = Instantiate(levelIndicatorGO, Vector2.Lerp(start, end, (float)column / (float)levelsPerSide), Quaternion.Euler(Vector3.forward * rot), transform).GetComponent<SpriteRenderer>();
+            levelIndicators[i] = Instantiate(levelIndicatorGO, Vector2.Lerp(start, end, (float)column / (float)levelsPerSide), Quaternion.Euler(Vector3.forward * rot), indicatorParent).GetComponent<SpriteRenderer>();
             levelIndicators[i].color = indicatorColor[isSolved[i]];
         }
     }
