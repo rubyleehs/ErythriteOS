@@ -41,18 +41,19 @@ public class PuzzleManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            if (BoardOS.CheckElementPattern(puzzleShower.puzzle)) SolvePuzzle();
+            TrySolvePuzzle();
         }
     }
 
-    public void SolvePuzzle()
+    public void TrySolvePuzzle()
     {
-        if (puzzles[currentPuzzleIndex].CheckWinCondition())
+        if (BoardOS.CheckElementPattern(puzzleShower.puzzle) && puzzles[currentPuzzleIndex].CheckWinCondition())
         {
             isSolved[currentPuzzleIndex]++;
             levelIndicators[currentPuzzleIndex].color = Color.Lerp(selectedColor, indicatorColor[isSolved[currentPuzzleIndex]], 0.4f);
             Debug.Log("sucess!");
         }
+        else Debug.Log("fail");
     }
 
     public void SetPuzzle(int index)

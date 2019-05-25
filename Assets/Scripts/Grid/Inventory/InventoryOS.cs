@@ -38,7 +38,11 @@ public class InventoryOS : MonoBehaviour
     public static bool RequestUse(Vector2 worldPos)
     {
         request = inventoryGrid.WorldPosToGrid(MainCamera.mousePos);
-        if (request == null) return false;
+        if (request == null || !request.isAvailable)
+        {
+            request = null;
+            return false;
+        }
         else if (request.UpdateAvailability(false)) return true;
         else return false;
     }

@@ -15,7 +15,7 @@ public class HistoryManager : MonoBehaviour //Managers history of the board & el
     private static List<List<GridChange>> gridHistory;
     private static List<GridChange> gridPresent;
 
-    private static int currentPointOfTime = -1;
+    public static int currentPointOfTime = -1;
 
     private void Awake()
     {
