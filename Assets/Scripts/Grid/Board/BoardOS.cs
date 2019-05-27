@@ -50,11 +50,11 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
         }
     }
 
-    public static void ForceChange(Vector2Int index, int id, bool runUpdated)
+    public static void ForceChange(Vector2Int index, int id, bool lightUp, bool runUpdated)
     {
         HexBoardTile ht = hexBoard.grid[index.y][index.x];
         ht.UpdateElement(id);
-        ht.UpdateVisuals();
+        ht.UpdateVisuals(lightUp);
         if (runUpdated) Run(ht);
     }
 
@@ -64,8 +64,8 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
         if (tile.ReadElementID() >= 0)
         {
             int elementUsed = tile.ReadElementID();
-            bvus.ForceComplete();
-            tile.UpdateVisuals();
+            bvus.ForceComplete(true);
+            tile.UpdateVisuals(true);
             GridElementManager.elements[elementUsed].Run(tile);
         }
         EndTurn();
@@ -93,6 +93,8 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
         endTurnEffectsTilesQueue.Clear();
         endTurnUpdateQueue.Clear();
         endTurnUpdateQueueId.Clear();
+
+
     }
 
     public static void AddToEndTurnUpdateQueue(HexBoardTile tile, int id)
@@ -101,7 +103,7 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
         endTurnUpdateQueueId.Add(id);
     }
 
-    public static bool CheckElementPattern(int[][] pattern)
+    public static bool FindElementPattern(int[][] pattern)
     {
         HexBoardTile runtile;
         Vector2Int patternIndex;
@@ -117,11 +119,12 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
                     {
                         patternIndex.x++;
                         runtile = runtile.adjTiles[(int)Hexinal.E];
+                        
                         /*
                         if (pattern[patternIndex.y][patternIndex.x] >= -1)
                         {
                             runtile.UpdateElement(pattern[patternIndex.y][patternIndex.x]);
-                            runtile.UpdateVisuals();
+                            runtile.UpdateVisuals(true);
                         }
                         */
                     }
@@ -131,10 +134,10 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
                         patternIndex.x = 1;
 
                         int d = pattern[patternIndex.y][0] - pattern[patternIndex.y - 1][0] - (pattern[patternIndex.y - 1].Length -2) + 1;
-                        Debug.Log(pattern[patternIndex.y][0] + " - " + pattern[patternIndex.y - 1][0] + " - " + (pattern[patternIndex.y - 1].Length - 2));
+                        //Debug.Log(pattern[patternIndex.y][0] + " - " + pattern[patternIndex.y - 1][0] + " - " + (pattern[patternIndex.y - 1].Length - 2));
                         runtile = runtile.adjTiles[(int)Hexinal.NW];
                         if (patternIndex.y % 2 == 0) d--;
-                        Debug.Log(d);
+                        //Debug.Log(d);
                         if (d >= 0)
                         {
                             for (int i = 0; i < d; i++)
@@ -151,11 +154,12 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
                                 runtile = runtile.adjTiles[(int)Hexinal.W];
                             }
                         }
+                        
                         /*
                         if (pattern[patternIndex.y][patternIndex.x] >= -1)
                         {
                             runtile.UpdateElement(pattern[patternIndex.y][patternIndex.x]);
-                            runtile.UpdateVisuals();
+                            runtile.UpdateVisuals(true);
                         }
                         */
                     }
@@ -164,5 +168,10 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
             }
         }
         return false;
+    }
+
+    public static int GetTileID(Vector2Int index)
+    {
+        return hexBoard.grid[index.y][index.x].ReadElementID();
     }
 }

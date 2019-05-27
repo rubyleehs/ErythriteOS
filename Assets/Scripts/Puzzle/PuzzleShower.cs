@@ -8,7 +8,7 @@ public class PuzzleShower : MonoBehaviour
     public GameObject cellGO;
 
     public float tileXDelta;
-    public int[][] puzzle;
+    public static int[][] puzzle;
     public Transform elementParent;
     public float tileMaxRadiusFromCenter;
 

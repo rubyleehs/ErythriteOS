@@ -24,7 +24,7 @@ public class BoardVisualUpdateSequencer : MonoBehaviour
 
                 for (int i = 0; i < queue[0].Count; i++)
                 {
-                    if(queue[0][i] != null) queue[0][i].UpdateVisuals();
+                    if(queue[0][i] != null) queue[0][i].UpdateVisuals(true);
                 }
                 queue.RemoveAt(0);
             }
@@ -32,13 +32,13 @@ public class BoardVisualUpdateSequencer : MonoBehaviour
         else dt = 0;
     }
 
-    public void ForceComplete()
+    public void ForceComplete(bool lightsUp)
     {
         while(queue.Count >0)
         {
             for (int i = 0; i < queue[0].Count; i++)
             {
-                if (queue[0][i] != null) queue[0][i].UpdateVisuals();
+                if (queue[0][i] != null) queue[0][i].UpdateVisuals(lightsUp);
             }
             queue.RemoveAt(0);
         }

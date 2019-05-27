@@ -17,8 +17,8 @@ public class PlayerInteractions : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z)) HistoryManager.Undo();
-        else if (Input.GetKeyDown(KeyCode.Y)) HistoryManager.Redo();
+        //if (Input.GetKeyDown(KeyCode.Z)) HistoryManager.Undo();
+        //else if (Input.GetKeyDown(KeyCode.Y)) HistoryManager.Redo();
 
         if (Input.GetKeyDown(KeyCode.Mouse0)) PickInventoryElement();
         else if (Input.GetKeyUp(KeyCode.Mouse0)) DropInventoryElement();
@@ -38,7 +38,7 @@ public class PlayerInteractions : MonoBehaviour
     {
         if(InventoryOS.RequestUse(MainCamera.mousePos))
         {
-            BoardOS.bvus.ForceComplete();
+            BoardOS.bvus.ForceComplete(true);
             elementDeltaPos = (Vector2)InventoryOS.request.transform.position - MainCamera.mousePos;
             mouseElementSpriteRenderer.sprite = GridElementManager.elements[InventoryOS.request.ReadID()].sprite;
         }

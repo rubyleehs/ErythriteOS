@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PuzzleManager : MonoBehaviour
 {
-    public Puzzle[] puzzles;
+    public Puzzle[] I_puzzles;
+    public static Puzzle[] puzzles;
     public PuzzleShower puzzleShower;
     public Transform indicatorParent;
     public GameObject levelIndicatorGO;
@@ -20,13 +21,14 @@ public class PuzzleManager : MonoBehaviour
     public static int[] isSolved;
 
     [HideInInspector]
-    public int currentPuzzleIndex = 0;
+    public static int currentPuzzleIndex = 0;
 
     [HideInInspector]
     public new Transform transform;
 
     private void Awake()
     {
+        puzzles = I_puzzles;
         transform = GetComponent<Transform>();
         isSolved = new int[puzzles.Length];
         levelIndicators = new SpriteRenderer[puzzles.Length];
@@ -42,16 +44,17 @@ public class PuzzleManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            TrySolvePuzzle();
+            SubmitPuzzle();
         }
     }
 
-    public void TrySolvePuzzle()
+    public void SubmitPuzzle()
     {
-        if (BoardOS.CheckElementPattern(puzzleShower.puzzle) && puzzles[currentPuzzleIndex].CheckWinCondition())
+        if (CheckIfCurrentCanBeSubmitted())
         {
             isSolved[currentPuzzleIndex]++;
             levelIndicators[currentPuzzleIndex].color = Color.Lerp(selectedColor, indicatorColor[isSolved[currentPuzzleIndex]], 0.4f);
+            HistoryManager.bSubmit.interactable = false;
             Debug.Log("sucess!");
         }
         else Debug.Log("fail");
@@ -66,6 +69,9 @@ public class PuzzleManager : MonoBehaviour
 
         puzzleShower.SetPuzzle(puzzles[currentPuzzleIndex]);
         levelIndicators[currentPuzzleIndex].color = Color.Lerp(selectedColor, indicatorColor[isSolved[currentPuzzleIndex]], 0.4f);
+
+        HistoryManager.bSubmit.interactable = CheckIfCurrentCanBeSubmitted();
+        //HistoryManager.bClear.onClick.Invoke();
     }
 
     public void ChangePuzzle(int delta)
@@ -75,7 +81,10 @@ public class PuzzleManager : MonoBehaviour
         while (currentPuzzleIndex < 0) currentPuzzleIndex += puzzles.Length;
         while (currentPuzzleIndex >= puzzles.Length) currentPuzzleIndex -= puzzles.Length;
         puzzleShower.SetPuzzle(puzzles[currentPuzzleIndex]);
-        levelIndicators[currentPuzzleIndex].color = Color.Lerp(selectedColor, indicatorColor[isSolved[currentPuzzleIndex]], 0.4f);//
+        levelIndicators[currentPuzzleIndex].color = Color.Lerp(selectedColor, indicatorColor[isSolved[currentPuzzleIndex]], 0.4f);
+
+        HistoryManager.bSubmit.interactable = CheckIfCurrentCanBeSubmitted();
+        //HistoryManager.bClear.onClick.Invoke();
     }
 
     public void SpawnLevelIndicators()
@@ -89,8 +98,24 @@ public class PuzzleManager : MonoBehaviour
             Vector2 end = Quaternion.Euler(Vector3.forward * ((side + 1) * 60 - 30)) * Vector2.down * radius;
             float rot = side * 60;
             if (column == 0) rot -= 30;
-            levelIndicators[i] = Instantiate(levelIndicatorGO, Vector2.Lerp(start, end, (float)column / (float)levelsPerSide), Quaternion.Euler(Vector3.forward * rot), indicatorParent).GetComponent<SpriteRenderer>();
+            levelIndicators[i] = Instantiate(levelIndicatorGO, Vector2.Lerp(start, end, (float)column / (float)levelsPerSide) + (Vector2)indicatorParent.position, Quaternion.Euler(Vector3.forward * rot), indicatorParent).GetComponent<SpriteRenderer>();
             levelIndicators[i].color = indicatorColor[isSolved[i]];
+        }
+    }
+
+    public static bool CheckIfCurrentCanBeSubmitted()
+    {
+        //Debug.Log("PCheck Start");
+        if (isSolved[currentPuzzleIndex] > 0) return false;
+        else
+        {
+            //Debug.Log("PCheck Not Solved");
+            if (!puzzles[currentPuzzleIndex].CheckWinCondition()) return false;
+            else
+            {
+                //Debug.Log(puzzles[currentPuzzleIndex].name);
+                return BoardOS.FindElementPattern(PuzzleShower.puzzle);
+            }
         }
     }
 }

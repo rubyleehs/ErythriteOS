@@ -46,9 +46,9 @@ public class HexBoardTile: HexTile
         return elementID;
     }
 
-    public void UpdateVisuals()
+    public void UpdateVisuals(bool lightUp)
     {
-        GameManager.shotgunSurgery.ForceStartCoroutine(LightUp(GameManager.animationInfo.tileLightUpColor));
+        GameManager.shotgunSurgery.ForceStartCoroutine(LightUp(GameManager.animationInfo.tileLightUpColor, lightUp));
 
         if (visualElementId.Count <= 0) return;
         if (visualElementId[0] >= 0)
@@ -68,7 +68,7 @@ public class HexBoardTile: HexTile
         visualElementId.RemoveAt(0);
     }
    
-    public IEnumerator LightUp(Color color)
+    public IEnumerator LightUp(Color color, bool lightsUp)
     {
         Color endColor;
         if(visualElementId.Count <= 0)
@@ -79,7 +79,8 @@ public class HexBoardTile: HexTile
         else if (visualElementId[0] == -1) endColor = originalColor;
         else endColor = GameManager.animationInfo.occupiedTileColor;
 
-        spriteRenderer.color = color;
+        if (lightsUp) spriteRenderer.color = color;
+        else color = spriteRenderer.color;
 
         float dt = 0;
         float smoothProgress = 0;
