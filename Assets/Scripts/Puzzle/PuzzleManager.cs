@@ -10,7 +10,6 @@ public class PuzzleManager : MonoBehaviour
     public Transform indicatorParent;
     public GameObject levelIndicatorGO;
 
-
     public int levelsPerSide;
     public float radius;
     public Color selectedColor;
@@ -55,9 +54,20 @@ public class PuzzleManager : MonoBehaviour
             isSolved[currentPuzzleIndex]++;
             levelIndicators[currentPuzzleIndex].color = Color.Lerp(selectedColor, indicatorColor[isSolved[currentPuzzleIndex]], 0.4f);
             HistoryManager.bSubmit.interactable = false;
-            Debug.Log("sucess!");
+            //Debug.Log("sucess!");
+
+            for (int i = 0; i < isSolved.Length; i++)
+            {
+                if (isSolved[i] <= 0)
+                {
+                    Debug.Log(i);
+                    return;
+                }
+            }
+
+            GameManager.EndOfGame(true);
         }
-        else Debug.Log("fail");
+        //else Debug.Log("fail");
     }
 
     public void SetPuzzle(int index)
@@ -114,6 +124,7 @@ public class PuzzleManager : MonoBehaviour
             else
             {
                 //Debug.Log(puzzles[currentPuzzleIndex].name);
+
                 return BoardOS.FindElementPattern(PuzzleShower.puzzle);
             }
         }

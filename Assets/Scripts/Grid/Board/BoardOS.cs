@@ -79,7 +79,9 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
             if (ht.ReadElementID() != -1) GridElementManager.elements[ht.ReadElementID()].OnTurnEnd(ht);
             else
             {
-                Debug.Log("Invalid End Turn Effect!");
+                //endTurnEffectsTiles.Remove(endTurnEffectsTiles.ElementAt(i));
+                i--;
+                //Debug.Log("Invalid End Turn Effect!");
             }
         }
 
@@ -113,8 +115,11 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
             {
                 patternIndex = Vector2Int.right;
                 runtile = hexBoard.grid[y][x];
-                while (runtile != null && (runtile.ReadElementID() == pattern[patternIndex.y][patternIndex.x] || (pattern[patternIndex.y][patternIndex.x] == -2 && runtile.ReadElementID() == -1)))
+                if (pattern[patternIndex.y][patternIndex.x] == -2) continue;
+                int failsafe = 0;
+                while (failsafe < 200 && runtile != null && (runtile.ReadElementID() == pattern[patternIndex.y][patternIndex.x] || (pattern[patternIndex.y][patternIndex.x] == -2 && runtile.ReadElementID() == -1)))
                 {
+                    failsafe++;
                     if (patternIndex.x < pattern[patternIndex.y].Length - 1)//
                     {
                         patternIndex.x++;
@@ -161,7 +166,7 @@ public class BoardOS : MonoBehaviour //Used for interactions within the board.
                             runtile.UpdateElement(pattern[patternIndex.y][patternIndex.x]);
                             runtile.UpdateVisuals(true);
                         }
-                        */
+                        */      
                     }
                     else return true;
                 }

@@ -25,6 +25,8 @@ public class HistoryManager : MonoBehaviour //Managers history of the board & el
     public UnityEngine.UI.Button I_bClear;
     public static UnityEngine.UI.Button bSubmit;
     public UnityEngine.UI.Button I_bSubmit;
+    public ParticleSystem I_puzzleCompletePS;
+    public static ParticleSystem puzzleCompletePS;
 
     private void Awake()
     {
@@ -36,6 +38,7 @@ public class HistoryManager : MonoBehaviour //Managers history of the board & el
         bRedo = I_bRedo;
         bSubmit = I_bSubmit;
         bClear = I_bClear;
+        puzzleCompletePS = I_puzzleCompletePS;
         bUndo.interactable = false;
         bRedo.interactable = false;
         bSubmit.interactable = false;
@@ -66,14 +69,20 @@ public class HistoryManager : MonoBehaviour //Managers history of the board & el
 
         bUndo.interactable = true;
         bRedo.interactable = false;
-        bSubmit.interactable = PuzzleManager.CheckIfCurrentCanBeSubmitted();
         bClear.interactable = true;
+        if (PuzzleManager.CheckIfCurrentCanBeSubmitted())
+        {
+            bSubmit.interactable = true;
+            //Debug.Log("PuzzleComplete!");
+            puzzleCompletePS.Play();
+        }
+        else bSubmit.interactable = false;
     }
 
     public void Undo(bool lightsUp)
     {
         if (currentPointOfTime < 0) return;
-        Debug.Log("Undo | " + currentPointOfTime);
+        //Debug.Log("Undo | " + currentPointOfTime);
         BoardOS.bvus.ForceComplete(lightsUp);
 
         if(inventoryHistory[currentPointOfTime] != null) inventoryHistory[currentPointOfTime].UpdateAvailability(true);
@@ -92,7 +101,7 @@ public class HistoryManager : MonoBehaviour //Managers history of the board & el
     public void Redo()
     {
         if (currentPointOfTime >= gridHistory.Count - 1) return;
-        Debug.Log("Redo | " + (currentPointOfTime + 1));
+        //Debug.Log("Redo | " + (currentPointOfTime + 1));
         BoardOS.bvus.ForceComplete(true);
 
         if (inventoryHistory[currentPointOfTime + 1] != null) inventoryHistory[currentPointOfTime + 1].UpdateAvailability(false);
@@ -121,6 +130,7 @@ public class HistoryManager : MonoBehaviour //Managers history of the board & el
             }
             currentPointOfTime--;
         }
+        gridPresent.Clear();
         gridHistory.Clear();
         inventoryHistory.Clear();
         bRedo.interactable = false;

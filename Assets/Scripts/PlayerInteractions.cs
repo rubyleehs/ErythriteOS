@@ -10,6 +10,8 @@ public class PlayerInteractions : MonoBehaviour
     private Vector2 elementDeltaPos;
     private SpriteRenderer mouseElementSpriteRenderer;
 
+    public static bool canInteractWithElements = true;
+
     private void Awake()
     {
         mouseElementSpriteRenderer = mouseElementTransform.GetComponent<SpriteRenderer>();
@@ -17,6 +19,7 @@ public class PlayerInteractions : MonoBehaviour
 
     void Update()
     {
+        if (!canInteractWithElements) return;
         //if (Input.GetKeyDown(KeyCode.Z)) HistoryManager.Undo();
         //else if (Input.GetKeyDown(KeyCode.Y)) HistoryManager.Redo();
 

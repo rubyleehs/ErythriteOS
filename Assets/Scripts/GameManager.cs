@@ -23,9 +23,24 @@ public class GameManager : MonoBehaviour
     public static ShotgunSurgery shotgunSurgery;
     public ShotgunSurgery I_shotgunSurgery;
 
+    public static Transform endGameScreen;
+    public Transform I_endGameScreen;
+
     private void Awake()
     {
         animationInfo = I_animationInfo;
         shotgunSurgery = I_shotgunSurgery;
-    } 
+        endGameScreen = I_endGameScreen;
+    }
+    
+    public static void EndOfGame(bool isEnd)
+    {
+        PlayerInteractions.canInteractWithElements = !isEnd;
+        endGameScreen.gameObject.SetActive(isEnd);
+    }
+
+    public void ContinueGame() //Because UNITY UI BUTTON FOR SOME REASON DONT LIKE STATIC FUNCTIONS
+    {
+        EndOfGame(false);
+    }
 }
