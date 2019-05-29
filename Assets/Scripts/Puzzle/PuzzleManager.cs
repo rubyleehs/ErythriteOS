@@ -38,15 +38,15 @@ public class PuzzleManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow)) ChangePuzzle(1);
-        else if (Input.GetKeyDown(KeyCode.LeftArrow)) ChangePuzzle(-1);
+        //if (Input.GetKeyDown(KeyCode.RightArrow)) ChangePuzzle(1);
+        //else if (Input.GetKeyDown(KeyCode.LeftArrow)) ChangePuzzle(-1);
 
         if (Input.GetKeyDown(KeyCode.C))
         {
             SubmitPuzzle();
         }
     }
-
+//
     public void SubmitPuzzle()
     {
         if (CheckIfCurrentCanBeSubmitted())

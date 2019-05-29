@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public ShotgunSurgery I_shotgunSurgery;
 
     public static Transform endGameScreen;
-    public Transform I_endGameScreen;
+    public Transform I_endGameScreen;//
 
     private void Awake()
     {
